@@ -1,0 +1,19 @@
+{
+  "cwd": "/home/raul/Desktop/Projects",
+  "type": [
+    "web"
+  ],
+  "name": "Outb",
+  "framework": "vue",
+  "template": "single-view",
+  "cssPreProcessor": "scss",
+  "bundler": "vite",
+  "theming": {
+    "customColor": true,
+    "color": "#2F62D7",
+    "darkTheme": false,
+    "iconFonts": true,
+    "fillBars": false
+  },
+  "customBuild": false
+}

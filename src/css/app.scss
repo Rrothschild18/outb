@@ -1,0 +1,15 @@
+@import "./styles/libs/bootstrap/main.scss";
+
+/* Custom color theme properties */
+root {
+  --f7-theme-color: #2f62d7;
+  --f7-theme-color-rgb: 47, 98, 215;
+  --f7-theme-color-shade: #2451ba;
+  --f7-theme-color-tint: #517cde;
+}
+
+/* Your app custom styles here */
+
+body {
+  font-family: "Inter", sans-serif;
+}
