@@ -3,7 +3,9 @@
     <div
       class="d-flex flex-column align-items-center justify-content-center wrapper"
     >
-      <img src="/assets/logo.png" alt="Logo" />
+      <svg width="123" height="135">
+        <image class="logo" xlink:href="/assets/Logo.svg" />
+      </svg>
       <h1 class="fw-bold text-primary mb-0">OUTb</h1>
       <!-- <f7-link href="/first/">First</f7-link> -->
       <!-- <span @click="f7router.navigate('/first/')">TESTEEE</span> -->
@@ -35,5 +37,9 @@ export default {
 <style scoped>
 .wrapper {
   padding-top: 240px;
+}
+.logo {
+  width: 123px;
+  height: 135px;
 }
 </style>

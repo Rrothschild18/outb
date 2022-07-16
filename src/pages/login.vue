@@ -1,14 +1,20 @@
 <template>
   <f7-page name="login">
     <f7-block>
-      <f7-icon material="arrow_back" size="30px"></f7-icon>
+      <f7-icon
+        material="arrow_back"
+        size="30px"
+        @click="f7router.back()"
+      ></f7-icon>
       <f7-row>
         <div
           class="d-flex flex-column align-items-center justify-content-center wrapper"
         >
           <div class="d-flex align-items-center">
-            <img src="/assets/LoginLogo.png" class="me-5" alt="Logo" />
-            <h1 class="fw-bold text-primary mb-0">OUTb</h1>
+            <svg width="84" height="92">
+              <image class="logo" xlink:href="/assets/LoginLogo.svg" />
+            </svg>
+            <h1 class="fw-bold text-primary ms-4 mb-0">OUTb</h1>
           </div>
 
           <form action="" class="w-100 Form">
@@ -49,6 +55,11 @@
 </template>
 <script>
 export default {
+  props: {
+    f7route: Object,
+    f7router: Object,
+  },
+
   data() {
     return {
       count: 0,
@@ -60,7 +71,7 @@ export default {
 </script>
 <style scoped>
 .wrapper {
-  padding-top: 130px;
+  padding-top: 15vh;
 }
 .Form {
   margin-top: 81px;

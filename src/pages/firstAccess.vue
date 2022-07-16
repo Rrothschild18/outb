@@ -3,7 +3,9 @@
     <div
       class="d-flex flex-column align-items-center justify-content-center wrapper"
     >
-      <img src="/assets/logo.png" alt="Logo" />
+      <svg width="123" height="135">
+        <image class="logo" xlink:href="/assets/Logo.svg" />
+      </svg>
       <h1 class="fw-bold text-primary mb-0">OUTb</h1>
 
       <div class="d-flex actions">
@@ -35,10 +37,10 @@ export default {
 </script>
 <style scoped>
 .wrapper {
-  padding-top: 240px;
+  padding-top: 25vh;
 }
 .actions {
-  margin-top: 153px;
+  margin-top: 15vh;
 }
 .Button {
   width: 160px;
@@ -46,5 +48,9 @@ export default {
   border-radius: 4px;
   font-size: 16px;
   text-transform: unset;
+}
+.logo {
+  width: 123px;
+  height: 135px;
 }
 </style>
