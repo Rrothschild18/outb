@@ -7,7 +7,7 @@
           class="d-flex flex-column align-items-center justify-content-center wrapper"
         >
           <div class="d-flex align-items-center">
-            <img src="assets/LoginLogo.png" class="me-5" alt="Logo" />
+            <img src="/assets/LoginLogo.png" class="me-5" alt="Logo" />
             <h1 class="fw-bold text-primary mb-0">OUTb</h1>
           </div>
 
