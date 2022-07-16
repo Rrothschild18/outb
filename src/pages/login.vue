@@ -1,15 +1,9 @@
 <template>
   <f7-page name="login">
     <f7-block>
-      <f7-icon
-        material="arrow_back"
-        size="30px"
-        @click="f7router.back()"
-      ></f7-icon>
+      <f7-icon material="arrow_back" size="30px" @click="f7router.back()"></f7-icon>
       <f7-row>
-        <div
-          class="d-flex flex-column align-items-center justify-content-center wrapper"
-        >
+        <div class="d-flex flex-column align-items-center justify-content-center wrapper">
           <div class="d-flex align-items-center">
             <svg width="84" height="92">
               <image class="logo" xlink:href="/assets/LoginLogo.svg" />
@@ -18,33 +12,19 @@
           </div>
 
           <form action="" class="w-100 Form">
-            <f7-input
-              label="E-mail"
-              class="Input"
-              type="email"
-              placeholder="E-mail"
-              clear-button
-            >
-            </f7-input>
+            <f7-input label="E-mail" class="Input" type="email" placeholder="E-mail" clear-button> </f7-input>
 
-            <f7-input
-              label="Senha"
-              class="Input mt-6"
-              type="password"
-              placeholder="Senha"
-              clear-button
-            >
-            </f7-input>
+            <f7-input label="Senha" class="Input mt-6" type="password" placeholder="Senha" clear-button> </f7-input>
             <div class="d-flex justify-content-end mt-4">
               <span class="text-primary">Esqueceu a senha?</span>
             </div>
           </form>
 
           <div class="d-flex flex-column actions w-100">
-            <f7-button fill href="/login/" class="Button w-100">
+            <f7-button fill @click="f7router.navigate('/home/')" class="Button w-100">
               <span>Entrar</span>
             </f7-button>
-            <f7-button href="/login/" class="Button w-100">
+            <f7-button class="Button w-100">
               <span>Solicitar acesso</span>
             </f7-button>
           </div>
