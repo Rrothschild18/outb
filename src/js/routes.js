@@ -1,6 +1,8 @@
 import SplashPage from "../pages/splash.vue";
-import HomePage from "../pages/home.vue";
+// import HomePage from "../pages/home.vue";
 import NotFoundPage from "../pages/404.vue";
+import FirstAccess from "../pages/firstAccess.vue";
+import Login from "../pages/login.vue";
 
 var routes = [
   {
@@ -8,9 +10,17 @@ var routes = [
     component: SplashPage,
   },
   {
-    path: "/home/",
-    component: HomePage,
+    path: "/first/",
+    component: FirstAccess,
   },
+  {
+    path: "/login/",
+    component: Login,
+  },
+  // {
+  //   path: "/home/",
+  //   component: HomePage,
+  // },
   {
     path: "(.*)",
     component: NotFoundPage,
