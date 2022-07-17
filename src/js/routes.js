@@ -4,6 +4,7 @@ import NotFoundPage from "../pages/404.vue";
 import FirstAccess from "../pages/firstAccess.vue";
 import Login from "../pages/login.vue";
 import PatientSingle from "../pages/patientSingle.vue";
+import PatientList from "../pages/patient-list.vue";
 
 var routes = [
   {
@@ -25,6 +26,10 @@ var routes = [
   {
     path: "/patient/",
     component: PatientSingle,
+  },
+  {
+    path: "/patients/",
+    component: PatientList,
   },
   {
     path: "(.*)",
