@@ -1,12 +1,12 @@
 <template>
-  <f7-navbar no-shadow class="shadow-sm">
-    <template #default>
-      <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
-        <h4 class="mb-0 fw-bold">Home</h4>
-      </div>
-    </template>
-  </f7-navbar>
   <f7-page name="home">
+    <f7-navbar no-shadow class="shadow-sm">
+      <template #default>
+        <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
+          <h4 class="mb-0 fw-bold">Home</h4>
+        </div>
+      </template>
+    </f7-navbar>
     <f7-block class="mt-3">
       <!-- Top Navbar -->
 
@@ -23,7 +23,7 @@
               <span>13/12/ 2021</span>
             </div>
 
-            <f7-card class="m-0" :padding="false">
+            <f7-card class="m-0 status-card" :padding="false" @click="f7router.navigate('/patient/')">
               <template #content>
                 <f7-button class="status-button">
                   <div class="d-flex justify-content-between w-100 mb-3">
@@ -108,10 +108,12 @@
 </template>
 <script>
 export default {
+  props: {
+    f7route: Object,
+    f7router: Object,
+  },
   data() {
-    return {
-      count: 0,
-    };
+    return {};
   },
 
   methods: {},
