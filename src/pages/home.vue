@@ -27,11 +27,11 @@
               <template #content>
                 <f7-button class="status-button">
                   <div class="d-flex justify-content-between w-100 mb-3">
-                    <h6 class="text-secondary-blue">Retorno abandono</h6>
+                    <h6 class="text-secondary-blue mb-0">Retorno abandono</h6>
                     <f7-icon material="chevron_right" class="status-icon"></f7-icon>
                   </div>
                   <h4 class="fw-bold mb-0">Paciente 18062022</h4>
-                  <span class="text-gray-medium">Tratamento ambulatorial</span>
+                  <span class="text-gray-dark">Tratamento ambulatorial</span>
                 </f7-button>
               </template>
             </f7-card>
@@ -56,7 +56,7 @@
               </f7-col>
 
               <f7-col width="50" class="mb-3">
-                <f7-card class="m-0 border" no-shadow>
+                <f7-card class="m-0 border" no-shadow @click="f7router.navigate('/patients/')">
                   <template #content>
                     <div class="menu-content">
                       <div

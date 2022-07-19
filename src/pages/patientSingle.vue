@@ -13,7 +13,11 @@
         <h4>Historico de tratamento</h4>
 
         <span class="mb-3 d-block">Resumo</span>
-        <f7-card class="m-0 mt-5 status-card" :padding="false" @click="f7router.navigate('/patient/')">
+        <f7-card
+          class="m-0 mt-5 status-card"
+          :padding="false"
+          @click="f7router.navigate({ name: 'patientDataSingle', params: { id: 999 } })"
+        >
           <template #content>
             <f7-button class="status-button" color="yellow">
               <f7-row class="h-100">
@@ -78,19 +82,19 @@
 
         <div class="timeline d-flex flex-column align-items-start">
           <div class="timeline-item d-flex flex-column align-items-start">
-            <div class="circle"></div>
-            <h6 class="text-gray-dark">22 FEVEREIRO, 2020</h6>
-            <h5>Instavel</h5>
+            <div class="circle back-green"></div>
+            <h6 class="text-gray-dark">28 FEVEREIRO, 2020</h6>
+            <h5>Curado</h5>
             <span class="text-gray-dark text-start"
               >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua.
             </span>
-            <div class="line"></div>
+            <div class="line back-green"></div>
           </div>
           <div class="timeline-item d-flex flex-column align-items-start">
             <div class="circle _disabled"></div>
-            <h6 class="text-gray-dark">22 FEVEREIRO, 2020</h6>
-            <h5>Instavel</h5>
+            <h6 class="text-gray-dark">15 FEVEREIRO, 2020</h6>
+            <h5>Estavel</h5>
             <span class="text-gray-dark text-start"
               >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua.
@@ -99,13 +103,43 @@
           </div>
           <div class="timeline-item d-flex flex-column align-items-start">
             <div class="circle _disabled"></div>
-            <h6 class="text-gray-dark">22 FEVEREIRO, 2020</h6>
-            <h5>Instavel</h5>
+            <h6 class="text-gray-dark">13 FEVEREIRO, 2020</h6>
+            <h5>Estavel</h5>
             <span class="text-gray-dark text-start"
               >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua.
             </span>
             <div class="line _disabled"></div>
+          </div>
+          <div class="timeline-item d-flex flex-column align-items-start">
+            <div class="circle _disabled back-yellow"></div>
+            <h6 class="text-gray-dark">10 FEVEREIRO, 2020</h6>
+            <h5>Grave</h5>
+            <span class="text-gray-dark text-start"
+              >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.
+            </span>
+            <div class="line _disabled back-yellow"></div>
+          </div>
+          <div class="timeline-item d-flex flex-column align-items-start">
+            <div class="circle _disabled back-red"></div>
+            <h6 class="text-gray-dark">04 FEVEREIRO, 2020</h6>
+            <h5>Critico</h5>
+            <span class="text-gray-dark text-start"
+              >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.
+            </span>
+            <div class="line _disabled back-red"></div>
+          </div>
+          <div class="timeline-item d-flex flex-column align-items-start">
+            <div class="circle _disabled back-red"></div>
+            <h6 class="text-gray-dark">02 FEVEREIRO, 2020</h6>
+            <h5>Critico</h5>
+            <span class="text-gray-dark text-start"
+              >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.
+            </span>
+            <div class="line _disabled back-red"></div>
           </div>
         </div>
       </section>
@@ -183,10 +217,10 @@ export default {
     .circle {
       position: absolute;
       left: -22px;
-      top: -13px;
+      top: 3px;
       width: 16px;
       height: 16px;
-      background-color: red;
+      background-color: #2196f3;
       border-radius: 50%;
       z-index: 99;
 
@@ -195,6 +229,7 @@ export default {
         height: 12px;
         left: -20px;
         opacity: 0.7;
+        top: 5px;
       }
     }
 
@@ -202,13 +237,25 @@ export default {
       position: absolute;
       left: -15px;
       width: 2px;
+      top: 15px;
       height: 90%;
-      background-color: red;
+      background-color: #2196f3;
       z-index: 99;
 
       &._disabled {
         opacity: 0.7;
+        top: 17px;
       }
+    }
+
+    .back-red {
+      background: red;
+    }
+    .back-yellow {
+      background: #ffcc00;
+    }
+    .back-green {
+      background: #16794b;
     }
   }
 }

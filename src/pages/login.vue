@@ -66,7 +66,7 @@ export default {
   font-size: 16px;
   text-transform: unset;
 }
-.Input {
+input {
   height: 41px;
 }
 </style>
