@@ -10,28 +10,15 @@
     </f7-navbar>
     <f7-block class="mt-3">
       <h4>Listagem de pacientes</h4>
-      <section class="rounded bg-white shadow-sm">
-        <!-- <div class="p-4 pb-0 d-flex align-items-center">
-          <f7-input label="Pesquisar" class="w-100 me-4" type="text" outline placeholder="Pesquisar" clear-button>
-          </f7-input>
-          <f7-icon material="filter_list" size="20px"></f7-icon>
-        </div> -->
-        <f7-input type="email" placeholder="teste" outline />
-        <f7-list no-hairlines-md class="d-flex">
-          <f7-list-input
-            class="w-100"
-            outline
-            label="Name"
-            floating-label
-            type="text"
-            placeholder="Your name"
-            clear-button
-          >
-            <template #inner>
-              <f7-icon material="filter_list" size="20px"></f7-icon>
-            </template>
-          </f7-list-input>
-        </f7-list>
+      <section class="rounded bg-white shadow-sm pt-3">
+        <f7-searchbar
+          disable-button-text="Cancel"
+          class="shadow-none border-bottom"
+          placeholder="Pesquisar"
+          :clear-button="true"
+          :form="false"
+        ></f7-searchbar>
+
         <f7-list media-list class="PatientList no-hairline mb-3 rounded" virtual-list no-hairlines>
           <f7-list-item link="#" chevron-center v-for="({ name, type, status }, index) of patients" :key="index">
             <template #default>
