@@ -3,9 +3,9 @@ import HomePage from "../pages/home.vue";
 import NotFoundPage from "../pages/404.vue";
 import FirstAccess from "../pages/firstAccess.vue";
 import Login from "../pages/login.vue";
-import PatientSingle from "../pages/patientSingle.vue";
-import PatientDataSingle from "../pages/patientDataSingle.vue";
-import PatientList from "../pages/patient-list.vue";
+import PatientStatus from "../pages/patients/patientStatus.vue";
+import PatientSingle from "../pages/patients/patientSingle.vue";
+import PatientList from "../pages/patients/patientList.vue";
 
 var routes = [
   {
@@ -25,15 +25,17 @@ var routes = [
     component: HomePage,
   },
   {
-    path: "/patient/",
+    name: "PatientStatus",
+    path: "/status/:id",
+    component: PatientStatus,
+  },
+  {
+    name: "PatientSingle",
+    path: "/patient/:id",
     component: PatientSingle,
   },
   {
-    name: "patientDataSingle",
-    path: "/patient/:id",
-    component: PatientDataSingle,
-  },
-  {
+    name: "PatientList",
     path: "/patients/",
     component: PatientList,
   },

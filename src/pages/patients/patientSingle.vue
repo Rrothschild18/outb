@@ -1,5 +1,5 @@
 <template>
-  <f7-page name="patientDataSingle">
+  <f7-page name="PatientSingle">
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
@@ -12,13 +12,12 @@
       <section>
         <h4>Dados paciente</h4>
 
-        <f7-accordion-item>
+        <f7-accordion-item :open="true">
           <div class="bg-white rounded shadow-sm p-5 mb-5">
             <f7-accordion-toggle>
               <div class="d-flex justify-content-between">
                 <h5 class="mb-0 fw-bold mb-5">Dados basicos</h5>
                 <f7-icon :material="iconName"></f7-icon>
-                <f7-icon material="expand_more"></f7-icon>
               </div>
             </f7-accordion-toggle>
             <f7-accordion-content>
@@ -58,7 +57,6 @@
               <div class="d-flex justify-content-between">
                 <h5 class="mb-0 fw-bold mb-5">Dados médicos</h5>
                 <f7-icon :material="iconName"></f7-icon>
-                <f7-icon material="expand_more"></f7-icon>
               </div>
             </f7-accordion-toggle>
             <f7-accordion-content>

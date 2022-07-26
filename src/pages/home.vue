@@ -23,7 +23,11 @@
               <span>13/12/ 2021</span>
             </div>
 
-            <f7-card class="m-0 status-card" :padding="false" @click="f7router.navigate('/patient/')">
+            <f7-card
+              class="m-0 status-card"
+              :padding="false"
+              @click="f7router.navigate({ name: 'PatientStatus', params: { id: 999 } })"
+            >
               <template #content>
                 <f7-button class="status-button">
                   <div class="d-flex justify-content-between w-100 mb-3">
@@ -56,7 +60,7 @@
               </f7-col>
 
               <f7-col width="50" class="mb-3">
-                <f7-card class="m-0 border" no-shadow @click="f7router.navigate('/patients/')">
+                <f7-card class="m-0 border" no-shadow @click="f7router.navigate({ name: 'PatientList' })">
                   <template #content>
                     <div class="menu-content">
                       <div

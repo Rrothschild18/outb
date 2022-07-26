@@ -16,7 +16,7 @@
         <f7-card
           class="m-0 mt-5 status-card"
           :padding="false"
-          @click="f7router.navigate({ name: 'patientDataSingle', params: { id: 999 } })"
+          @click="f7router.navigate({ name: 'PatientSingle', params: { id: 999 } })"
         >
           <template #content>
             <f7-button class="status-button" color="yellow">
