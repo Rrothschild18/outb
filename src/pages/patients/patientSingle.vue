@@ -12,83 +12,63 @@
       <section>
         <h4>Dados paciente</h4>
 
-        <f7-accordion-item :open="true">
-          <div class="bg-white rounded shadow-sm p-5 mb-5">
-            <f7-accordion-toggle>
-              <div class="d-flex justify-content-between">
-                <h5 class="mb-0 fw-bold mb-5">Dados basicos</h5>
-                <f7-icon :material="iconName"></f7-icon>
-              </div>
-            </f7-accordion-toggle>
-            <f7-accordion-content>
-              <f7-row>
-                <f7-col width="100 mb-3">
-                  <h6 class="mb-0 fw-bold">Nome</h6>
-                  <span>Alberto David Rothschild</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Faixa etária</h6>
-                  <span>50-60</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Raça/Cor</h6>
-                  <span>Branco</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Sexo</h6>
-                  <span>Masculino</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Escolaridade</h6>
-                  <span>15 anos ou mais</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Ocupação</h6>
-                  <span>Aposentado</span>
-                </f7-col>
-              </f7-row>
-            </f7-accordion-content>
-          </div>
-        </f7-accordion-item>
+        <Box>
+          <f7-row>
+            <f7-col width="100 mb-3">
+              <h6 class="mb-0 fw-bold">Nome</h6>
+              <span>Alberto David Rothschild</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Faixa etária</h6>
+              <span>50-60</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Raça/Cor</h6>
+              <span>Branco</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Sexo</h6>
+              <span>Masculino</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Escolaridade</h6>
+              <span>15 anos ou mais</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Ocupação</h6>
+              <span>Aposentado</span>
+            </f7-col>
+          </f7-row>
+        </Box>
 
-        <f7-accordion-item>
-          <div class="bg-white rounded shadow-sm p-5">
-            <f7-accordion-toggle>
-              <div class="d-flex justify-content-between">
-                <h5 class="mb-0 fw-bold mb-5">Dados médicos</h5>
-                <f7-icon :material="iconName"></f7-icon>
-              </div>
-            </f7-accordion-toggle>
-            <f7-accordion-content>
-              <f7-row>
-                <f7-col width="100 mb-3">
-                  <h6 class="mb-0 fw-bold">Codigo tratamento anterior</h6>
-                  <span>9293231</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Tratou a</h6>
-                  <span>2 anos</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Situacao</h6>
-                  <span>Tratamento Ambulatorial</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Tipo</h6>
-                  <span>Recidiva</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Forma clinica</h6>
-                  <span>Ganglionar Periférica</span>
-                </f7-col>
-                <f7-col width="50 mb-3">
-                  <h6 class="mb-0 fw-bold">Descoberta</h6>
-                  <span>Busca Ativa na Comunidade</span>
-                </f7-col>
-              </f7-row>
-            </f7-accordion-content>
-          </div>
-        </f7-accordion-item>
+        <Box>
+          <f7-row>
+            <f7-col width="100 mb-3">
+              <h6 class="mb-0 fw-bold">Codigo tratamento anterior</h6>
+              <span>9293231</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Tratou a</h6>
+              <span>2 anos</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Situacao</h6>
+              <span>Tratamento Ambulatorial</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Tipo</h6>
+              <span>Recidiva</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Forma clinica</h6>
+              <span>Ganglionar Periférica</span>
+            </f7-col>
+            <f7-col width="50 mb-3">
+              <h6 class="mb-0 fw-bold">Descoberta</h6>
+              <span>Busca Ativa na Comunidade</span>
+            </f7-col>
+          </f7-row></Box
+        >
       </section>
     </f7-block>
   </f7-page>

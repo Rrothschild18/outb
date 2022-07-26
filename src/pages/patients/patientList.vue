@@ -19,8 +19,14 @@
           :form="false"
         ></f7-searchbar>
 
-        <f7-list media-list class="PatientList no-hairline mb-3 rounded" virtual-list no-hairlines>
-          <f7-list-item link="#" chevron-center v-for="({ name, type, status }, index) of patients" :key="index">
+        <f7-list media-list class="PatientList no-hairline mb-3" virtual-list no-hairlines>
+          <f7-list-item
+            link="#"
+            chevron-center
+            v-for="({ name, type, status }, index) of patients"
+            :key="index"
+            @click="f7router.navigate({ name: 'PatientSingle', params: { id: 999 } })"
+          >
             <template #default>
               <section class="d-flex">
                 <div>
