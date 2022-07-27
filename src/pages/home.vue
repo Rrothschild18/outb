@@ -45,7 +45,7 @@
             <f7-row>
               <h4 class="mt-5 fw-bold">Menu</h4>
               <f7-col width="50" class="mb-3">
-                <f7-card class="m-0 border" no-shadow>
+                <f7-card class="m-0 border" no-shadow @click="f7router.navigate({ name: 'PatientCreate' })">
                   <template #content>
                     <div class="menu-content">
                       <div

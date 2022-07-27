@@ -6,6 +6,7 @@ import Login from "../pages/login.vue";
 import PatientStatus from "../pages/patients/patientStatus.vue";
 import PatientSingle from "../pages/patients/patientSingle.vue";
 import PatientList from "../pages/patients/patientList.vue";
+import PatientCreate from "../pages/patients/patientCreate.vue";
 
 var routes = [
   {
@@ -29,10 +30,11 @@ var routes = [
     path: "/status/:id",
     component: PatientStatus,
   },
+
   {
-    name: "PatientSingle",
-    path: "/patient/:id",
-    component: PatientSingle,
+    name: "PatientCreate",
+    path: "/patient/new",
+    component: PatientCreate,
   },
   {
     name: "PatientList",
