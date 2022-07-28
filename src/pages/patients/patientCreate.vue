@@ -12,25 +12,37 @@
       <h4>Criar Paciente</h4>
 
       <section class="form">
-        <h6>Dados básicos</h6>
+        <h6>Passos</h6>
 
-        <div class="stepper w-100 d-flex align-items-center justify-content-between">
-          <div class="step-item w-100 position-relative">
-            <div class="ball d-flex align-items-center justify-content-center">
-              <div class="line"></div>
-              <span class="text-center">1</span>
+        <div class="stepper w-100 d-flex align-items-center justify-content-between mb-3">
+          <div class="step-item d-flex align-items-center justify-content-center w-100">
+            <div class="px-3 d-flex flex-column align-items-center">
+              <span class="ball _filled d-flex align-items-center justify-content-center fw-bold">1</span>
+              <span class="text-center text-gray-dark fw-bold">Dados básicos</span>
+            </div>
+
+            <div class="bg-primary position-relative w-100">
+              <hr class="line" />
             </div>
           </div>
-          <div class="step-item w-100 position-relative">
-            <div class="ball d-flex align-items-center justify-content-center _inactive">
-              <div class="line"></div>
-              <span class="text-center">2</span>
+          <div class="step-item d-flex align-items-center justify-content-center w-100">
+            <div class="px-3 d-flex flex-column align-items-center">
+              <span class="ball d-flex align-items-center justify-content-center fw-bold">2</span>
+              <span class="text-center text-gray-dark fw-bold">Dados médicos</span>
+            </div>
+
+            <div class="bg-primary position-relative w-100">
+              <hr class="line" />
             </div>
           </div>
-          <div class="step-item w-100 position-relative">
-            <div class="ball d-flex align-items-center justify-content-center _inactive">
-              <div class="line"></div>
-              <span class="text-center">3</span>
+          <div class="step-item d-flex align-items-center justify-content-center w-100">
+            <div class="px-3 d-flex flex-column align-items-center">
+              <span class="ball _inactive d-flex align-items-center justify-content-center fw-bold">3</span>
+              <span class="text-center text-gray-dark fw-bold">Dados da TB</span>
+            </div>
+
+            <div class="bg-primary position-relative w-100">
+              <hr class="line" />
             </div>
           </div>
         </div>
@@ -169,30 +181,54 @@ export default {
   }
 
   .stepper {
+    height: fit-content;
+
     .step-item {
       .ball {
-        height: 20px;
-        width: 20px;
+        height: 30px;
+        width: 30px;
         border-radius: 50%;
         background-color: #4648ff;
 
         &._inactive {
           background-color: #777777;
         }
+
+        &._filled {
+          background-color: rgba(70, 72, 255, 0.65);
+        }
       }
 
       .line {
         position: absolute;
-        display: block;
-        width: 100%;
-        height: 3px;
-        background: #4648ff;
+        width: 110%;
+        margin: 0;
+        top: -20px;
+        left: -7px;
       }
 
       span {
         color: #fff;
         font-size: 12px;
       }
+
+      &:last-child {
+        .line {
+          display: none;
+        }
+      }
+    }
+
+    > :last-child :is(div) {
+      padding-right: 0px !important;
+    }
+
+    > :last-child {
+      width: unset !important;
+    }
+
+    > :first-child :is(div) {
+      padding-left: 0px !important;
     }
   }
 }
