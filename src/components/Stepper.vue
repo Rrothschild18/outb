@@ -7,7 +7,7 @@
     >
       <div class="d-flex flex-column align-items-center">
         <span class="ball d-flex align-items-center justify-content-center fw-bold" :class="handleBallClasses(key)">
-          {{ key }}</span
+          {{ key + 1 }}</span
         >
         <span class="text-center text-gray-dark fw-bold">{{ step.title }}</span>
       </div>

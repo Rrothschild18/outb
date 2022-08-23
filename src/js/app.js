@@ -17,7 +17,7 @@ import "../css/app.scss";
 // Import App Component
 import App from "../components/app.vue";
 import Box from "../components/Box.vue";
-// import Stepper from "../components/Stepper.vue";
+import Stepper from "../components/Stepper.vue";
 
 // Init Framework7-Vue Plugin
 Framework7.use(Framework7Vue);
@@ -29,7 +29,7 @@ const app = createApp(App);
 registerComponents(app);
 
 app.component("Box", Box);
-// app.component("Stepper", Stepper);
+app.component("Stepper", Stepper);
 
 // Mount the app
 app.mount("#app");

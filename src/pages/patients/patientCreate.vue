@@ -3,18 +3,14 @@
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
-          <f7-link tab-link="#tab-1">
-            <f7-icon material="arrow_back" class="back-arrow ripple" size="30px" @click="handleBackEvents()"></f7-icon>
-          </f7-link>
-          <h4 class="mb-0 fw-bold">Incluir pacientes</h4>
+          <f7-icon material="arrow_back" class="back-arrow" size="30px" @click="f7router.back()"></f7-icon>
+          <h4 class="mb-0 fw-bold">Cadastrar paciente</h4>
         </div>
       </template>
     </f7-navbar>
     <f7-block class="mt-3">
-      <h4>Criar Paciente</h4>
-
       <section class="form">
-        <h6>Passos</h6>
+        <h5 class="fw-bold">Passos:</h5>
 
         <Stepper v-bind="stepperConfig" />
 
@@ -159,7 +155,7 @@
                 </f7-list>
               </f7-col>
               <f7-col width="100">
-                <f7-button fill class="Button w-100" tab-link="#tab-2" @click="nextStep()">
+                <f7-button fill class="Button w-100 mb-2" tab-link="#tab-2" @click="nextStep()">
                   <span class="text-capitalize">Prosseguir</span>
                 </f7-button>
                 <pre>{{ values }}</pre>
@@ -172,8 +168,11 @@
             <f7-row>
               <h2>STEP 2</h2>
               <f7-col width="100">
-                <f7-button fill class="Button w-100" tab-link="#tab-3">
+                <f7-button fill class="Button w-100" tab-link="#tab-3" @click="nextStep()">
                   <span class="text-capitalize">Prosseguir</span>
+                </f7-button>
+                <f7-button outline class="Button w-100" tab-link="#tab-1" @click="backStep()">
+                  <span class="text-capitalize">Voltar</span>
                 </f7-button>
                 <pre>{{ values }}</pre>
               </f7-col>
@@ -181,9 +180,18 @@
           </f7-tab>
 
           <f7-tab id="tab-3">
-            <!-- STEP 2 -->
+            <!-- STEP 3 -->
             <f7-row>
               <h2>STEP 3</h2>
+              <f7-col width="100">
+                <f7-button fill class="Button w-100" @click="createPatient()">
+                  <span class="text-capitalize">Finalizar</span>
+                </f7-button>
+                <f7-button outline class="Button w-100" tab-link="#tab-2" @click="backStep()">
+                  <span class="text-capitalize">Voltar</span>
+                </f7-button>
+                <pre>{{ values }}</pre>
+              </f7-col>
             </f7-row>
           </f7-tab>
         </f7-tabs>
@@ -192,13 +200,7 @@
   </f7-page>
 </template>
 <script>
-import Stepper from "../../components/Stepper.vue";
-
 export default {
-  components: {
-    Stepper,
-  },
-
   props: {
     f7route: Object,
     f7router: Object,
@@ -214,7 +216,6 @@ export default {
 
   data() {
     return {
-      formStep: 1,
       values: {
         name: "",
         age: "-",
@@ -228,7 +229,7 @@ export default {
 
       stepperConfig: {
         currentStep: 0,
-        stepsNumber: 3,
+        stepsNumber: 4,
         stepsContent: [
           {
             title: "Dados básicos",
@@ -244,18 +245,26 @@ export default {
     };
   },
 
-  watch: {},
+  watch: {
+    "stepperConfig.currentStep": (newStep, oldStep) => {
+      console.log({ newStep, oldStep });
+    },
+  },
 
   methods: {
     nextStep() {
+      if (this.stepperConfig.currentStep > this.stepperConfig.stepsNumber) return;
+
       this.stepperConfig.currentStep++;
     },
 
-    handleBackEvents() {
-      if (this.stepperConfig === 0) f7router.back();
+    backStep() {
+      if (this.stepperConfig.stepsNumber < this.stepperConfig.currentStep) return;
 
       this.stepperConfig.currentStep--;
     },
+
+    createPatient() {},
   },
 };
 </script>
