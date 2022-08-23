@@ -22,7 +22,7 @@
             <f7-button class="status-button" color="yellow">
               <f7-row class="h-100">
                 <f7-col width="100">
-                  <div class="d-flex justify-content-between w-100 mb-3">
+                  <div class="d-flex justify-content-between mb-3">
                     <div class="chip">
                       <h6 class="mb-0 fw-bold">Retorno abandono</h6>
                     </div>
@@ -44,34 +44,13 @@
       </section>
 
       <section class="mt-7 text-center">
-        <h5>Quadros clinicos</h5>
-
         <f7-row>
-          <f7-col width="33">
-            <div class="d-flex flex-column w-100">
-              <span>Melhorar</span>
-              <div class="d-flex align-items-center justify-content-center">
-                <span class="me-3">~10%</span>
-                <f7-badge color="green"> </f7-badge>
-              </div>
-            </div>
-          </f7-col>
-          <f7-col width="33">
-            <div class="d-flex flex-column w-100">
-              <span>Estavel</span>
-              <div class="d-flex align-items-center justify-content-center">
-                <span class="me-3">~30%</span>
-                <f7-badge color="blue"> </f7-badge>
-              </div>
-            </div>
-          </f7-col>
-          <f7-col width="33">
-            <div class="d-flex flex-column w-100">
-              <span>Agravar</span>
-              <div class="d-flex align-items-center justify-content-center">
-                <span class="me-3">~60%</span>
-                <f7-badge color="yellow"> </f7-badge>
-              </div>
+          <f7-col>
+            <h5 class="fw-bold">Quadro clinico</h5>
+            <div class="d-flex align-items-center justify-content-center">
+              <span class="me-3">Melhorar: </span>
+              <span class="me-1">~10%</span>
+              <f7-badge color="green"> </f7-badge>
             </div>
           </f7-col>
         </f7-row>
