@@ -246,20 +246,24 @@ export default {
   },
 
   watch: {
-    "stepperConfig.currentStep": (newStep, oldStep) => {
-      console.log({ newStep, oldStep });
-    },
+    "stepperConfig.currentStep": (newStep, oldStep) => {},
   },
 
   methods: {
     nextStep() {
-      if (this.stepperConfig.currentStep > this.stepperConfig.stepsNumber) return;
+      if (this.stepperConfig.currentStep > this.stepperConfig.stepsNumber) {
+        this.stepperConfig.currentStep = this.stepperConfig.stepsNumber;
+        return;
+      }
 
       this.stepperConfig.currentStep++;
     },
 
     backStep() {
-      if (this.stepperConfig.stepsNumber < this.stepperConfig.currentStep) return;
+      if (this.stepperConfig.stepsNumber < this.stepperConfig.currentStep) {
+        this.stepperConfig.currentStep = 0;
+        return;
+      }
 
       this.stepperConfig.currentStep--;
     },
