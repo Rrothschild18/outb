@@ -1,5 +1,5 @@
 <template>
-  <f7-page name="patientSingle">
+  <f7-page name="PatientStatus">
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
