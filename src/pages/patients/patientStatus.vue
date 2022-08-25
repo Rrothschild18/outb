@@ -20,15 +20,14 @@
         >
           <template #content>
             <f7-button class="status-button" color="yellow">
+              <div class="d-flex justify-content-between mb-3 w-100">
+                <div class="chip">
+                  <h6 class="mb-0 fw-bold">Retorno abandono</h6>
+                </div>
+                <f7-icon material="chevron_right" class="status-icon"></f7-icon>
+              </div>
               <f7-row class="h-100">
-                <f7-col width="100">
-                  <div class="d-flex justify-content-between mb-3">
-                    <div class="chip">
-                      <h6 class="mb-0 fw-bold">Retorno abandono</h6>
-                    </div>
-                    <f7-icon material="chevron_right" class="status-icon"></f7-icon>
-                  </div>
-                </f7-col>
+                <f7-col width="100"> </f7-col>
                 <f7-col width="50" class="d-flex flex-column align-items-start">
                   <span class="info text-gray-dark">Tipo</span>
                   <h6 class="mb-0 info-value fw-bold">Reincidente</h6>
