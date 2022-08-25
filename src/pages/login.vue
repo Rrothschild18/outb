@@ -12,12 +12,24 @@
           </div>
 
           <form action="" class="w-100 Form">
-            <f7-input label="E-mail" class="Input" type="email" placeholder="E-mail" clear-button> </f7-input>
+            <f7-row>
+              <f7-col width="100">
+                <f7-list no-hairlines class="m-0">
+                  <f7-input label="E-mail" type="email" placeholder="E-mail" clear-button> </f7-input>
+                </f7-list>
+              </f7-col>
+              <f7-col width="100 ">
+                <f7-list no-hairlines class="m-0">
+                  <f7-input label="Senha" class="mt-6" type="password" placeholder="Senha" clear-button> </f7-input>
+                </f7-list>
+              </f7-col>
 
-            <f7-input label="Senha" class="Input mt-6" type="password" placeholder="Senha" clear-button> </f7-input>
-            <div class="d-flex justify-content-end mt-4">
-              <span class="text-primary">Esqueceu a senha?</span>
-            </div>
+              <f7-col width="100 ">
+                <div class="d-flex justify-content-end mt-4">
+                  <span class="text-primary">Esqueceu a senha?</span>
+                </div>
+              </f7-col>
+            </f7-row>
           </form>
 
           <div class="d-flex flex-column actions w-100">
