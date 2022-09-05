@@ -53,6 +53,8 @@
   </f7-page>
 </template>
 <script>
+import { setColor } from "../../helpers/colors";
+
 export default {
   props: {
     f7route: Object,
@@ -70,23 +72,18 @@ export default {
         { name: "P #30062022", type: "Retorno abandono", status: "green" },
         { name: "P #12262022", type: "Retrat mud esquema int/tox", status: "gray" },
         { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
+        { name: "P #19062020", type: "Recidiva", status: "success" },
+        { name: "P #19062020", type: "Recidiva", status: "success" },
         { name: "P #19062020", type: "Recidiva", status: "blue" },
       ],
     };
   },
 
   methods: {
+    setColor,
+
     statusColor(status) {
-      return { backgroundColor: `${status}` };
+      return { backgroundColor: `${this.setColor(status)}` };
     },
   },
 };
