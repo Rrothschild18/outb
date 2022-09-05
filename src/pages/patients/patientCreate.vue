@@ -18,7 +18,7 @@
           <f7-tab id="tab-1" tab-active>
             <!-- STEP 1 -->
             <f7-row>
-              <f7-col width="100 mb-3">
+              <f7-col width="100" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input
                     label="Nome"
@@ -31,7 +31,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="100 mb-3">
+              <f7-col width="100" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input
                     label="Tipo ocupação"
@@ -51,7 +51,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="50 mb-3">
+              <f7-col width="50" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input label="Faixa Etaria" floating-label type="select" v-model:value="values.age" outline>
                     <option value="-">-</option>
@@ -70,7 +70,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="50 mb-3">
+              <f7-col width="50" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input label="Raça/Cor" floating-label type="select" v-model:value="values.race" outline>
                     <option value="-">-</option>
@@ -83,7 +83,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="50 mb-3">
+              <f7-col width="50" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input label="Sexo" floating-label type="select" v-model:value="values.gender" outline>
                     <option value="-">-</option>
@@ -92,7 +92,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="50 mb-3">
+              <f7-col width="50" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input
                     label="Escolaridade"
@@ -112,7 +112,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="100 mb-3">
+              <f7-col width="100" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input
                     label="Código do tratamento anterior"
@@ -131,7 +131,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="100 mb-3">
+              <f7-col width="100" class="mb-3">
                 <f7-list no-hairlines class="m-0">
                   <f7-list-input
                     label="Situação atual"
@@ -154,7 +154,7 @@
                   </f7-list-input>
                 </f7-list>
               </f7-col>
-              <f7-col width="100">
+              <f7-col width="100" class="mb-3">
                 <f7-button fill class="Button w-100 mb-2" tab-link="#tab-2" @click="nextStep()">
                   <span class="text-capitalize">Prosseguir</span>
                 </f7-button>
@@ -166,9 +166,41 @@
           <f7-tab id="tab-2">
             <!-- STEP 2 -->
             <f7-row>
-              <h2>STEP 2</h2>
+              <h2>Dados médicos</h2>
+
+              <form>
+                <f7-row v-if="hasFields">
+                  <f7-col
+                    :width="patientSecondStepColumns[fieldName]"
+                    class="mb-3"
+                    v-for="(fieldName, key) of patientSecondStepFields"
+                    :key="key"
+                  >
+                    <f7-list no-hairlines class="m-0">
+                      <f7-list-input
+                        :name="fields[fieldName].name"
+                        :label="fields[fieldName].label"
+                        :type="fields[fieldName].type"
+                        :placeholder="fields[fieldName].label"
+                        v-model:value="values[fields[fieldName].name]"
+                        floating-label
+                        outline
+                      >
+                        <option
+                          v-for="(option, optionKey) of fields[fieldName].options"
+                          :key="optionKey"
+                          :value="option.value"
+                        >
+                          {{ option.label }}
+                        </option>
+                      </f7-list-input>
+                    </f7-list>
+                  </f7-col>
+                </f7-row>
+              </form>
+
               <f7-col width="100">
-                <f7-button fill class="Button w-100" tab-link="#tab-3" @click="nextStep()">
+                <f7-button fill class="Button w-100 mb-2" tab-link="#tab-3" @click="nextStep()">
                   <span class="text-capitalize">Prosseguir</span>
                 </f7-button>
                 <f7-button outline class="Button w-100" tab-link="#tab-1" @click="backStep()">
@@ -180,9 +212,39 @@
           </f7-tab>
 
           <f7-tab id="tab-3">
-            <!-- STEP 3 -->
             <f7-row>
-              <h2>STEP 3</h2>
+              <h2>Dados sobre a TB e comorbidades</h2>
+              <form>
+                <f7-row v-if="hasFields">
+                  <f7-col
+                    :width="patientThirdStepColumns[fieldName]"
+                    class="mb-3"
+                    v-for="(fieldName, key) of patientThirdStepFields"
+                    :key="key"
+                  >
+                    <f7-list no-hairlines class="m-0">
+                      <f7-list-input
+                        :name="fields[fieldName].name"
+                        :label="fields[fieldName].label"
+                        :type="fields[fieldName].type"
+                        :placeholder="fields[fieldName].label"
+                        v-model:value="values[fields[fieldName].name]"
+                        floating-label
+                        outline
+                      >
+                        <option
+                          v-for="(option, optionKey) of fields[fieldName].options"
+                          :key="optionKey"
+                          :value="option.value"
+                        >
+                          {{ option.label }}
+                        </option>
+                      </f7-list-input>
+                    </f7-list>
+                  </f7-col>
+                </f7-row>
+              </form>
+
               <f7-col width="100">
                 <f7-button fill class="Button w-100" @click="createPatient()">
                   <span class="text-capitalize">Finalizar</span>
@@ -200,36 +262,63 @@
   </f7-page>
 </template>
 <script>
+import { patientFields } from "../../services";
+
 export default {
   props: {
     f7route: Object,
     f7router: Object,
   },
 
-  mounted() {},
-
-  computed: {
-    backTab() {
-      return this.stepperConfig.currentStep === 0 ? `#tab${this.stepperConfig.currentStep - 1}` : null;
-    },
-  },
-
   data() {
     return {
+      fields: {},
       values: {
         name: "",
-        age: "-",
-        race: "-",
-        gender: "-",
-        schooling: "-",
-        occupation: "-",
-        lastTreatmentCode: "",
+        occupation: "",
+        age: "",
+        race: "",
+        gender: "",
+        schooling: "",
         currentSituation: "",
+        lastTreatmentCode: "",
+        lastTreatment: "",
+        totComunic: "",
+        totComunicEx: "",
+        totComunicAd: "",
+        instTrat: "",
+        type: "",
+        manifest: "",
+        manifestTwo: "",
+        manifestThree: "",
+        classification: "",
+        discoveryType: "",
+        bac: "",
+        cultEsc: "",
+        cultOutro: "",
+        rx: "",
+        rxoutro: "",
+        necropsia: "",
+        hiv: "",
+        diabetes: "",
+        alcoolismo: "",
+        mental: "",
+        drogadicao: "",
+        tabagismo: "",
+        aids: "",
+        sensibility: "",
+        treatment: "",
+        initialExposure: "",
+        exposureChange: "",
+        actualExposure: "",
+        actualExposureReason: "",
+        resistencia: "",
+        histo: "",
       },
 
       stepperConfig: {
         currentStep: 0,
-        stepsNumber: 4,
+        stepsNumber: 3,
         stepsContent: [
           {
             title: "Dados básicos",
@@ -243,6 +332,121 @@ export default {
         ],
       },
     };
+  },
+
+  computed: {
+    hasFields() {
+      return !!Object.keys(this.fields).length;
+    },
+
+    hasFieldOptions(field) {
+      return !!field.options;
+    },
+
+    backTab() {
+      return this.stepperConfig.currentStep === 0 ? `#tab${this.stepperConfig.currentStep - 1}` : null;
+    },
+
+    patientFirstStepFields() {
+      return [
+        "name",
+        "occupation",
+        "age",
+        "race",
+        "gender",
+        "schooling",
+        "currentSituation",
+        "lastTreatmentCode",
+        "lastTreatment",
+        "totComunic",
+        "totComunicEx",
+        "totComunicAd",
+      ];
+    },
+
+    patientFirstStepColumns() {
+      return {};
+    },
+
+    patientSecondStepFields() {
+      return [
+        "instTrat",
+        "type",
+        "manifest",
+        "manifestTwo",
+        "manifestThree",
+        "classification",
+        "bac",
+        "discoveryType",
+        "cultEsc",
+        "cultOutro",
+        "rx",
+        "rxoutro",
+        "necropsia",
+      ];
+    },
+
+    patientSecondStepColumns() {
+      return {
+        instTrat: 100,
+        type: 100,
+        manifest: 100,
+        manifestTwo: 50,
+        manifestThree: 50,
+        discoveryType: 100,
+        classification: 50,
+        bac: 50,
+        cultEsc: 50,
+        cultOutro: 50,
+        rx: 100,
+        rxoutro: 50,
+        necropsia: 50,
+      };
+    },
+
+    patientThirdStepFields() {
+      return [
+        "hiv",
+        "diabetes",
+        "alcoolismo",
+        "mental",
+        "drogadicao",
+        "tabagismo",
+        "aids",
+        "sensibility",
+        "treatment",
+        "initialExposure",
+        "exposureChange",
+        "actualExposure",
+        "actualExposureReason",
+        "resistencia",
+        "histo",
+      ];
+    },
+
+    patientThirdStepColumns() {
+      return {
+        hiv: 100,
+        diabetes: 100,
+        alcoolismo: 100,
+        mental: 100,
+        drogadicao: 100,
+        tabagismo: 100,
+        aids: 100,
+        sensibility: 100,
+        treatment: 100,
+        initialExposure: 100,
+        exposureChange: 100,
+        actualExposure: 100,
+        actualExposureReason: 100,
+        resistencia: 100,
+        histo: 100,
+      };
+    },
+  },
+
+  mounted() {
+    this.getPatientFields();
   },
 
   watch: {
@@ -259,6 +463,10 @@ export default {
       this.stepperConfig.currentStep++;
     },
 
+    hasOptions(field) {
+      return !!field.options;
+    },
+
     backStep() {
       if (this.stepperConfig.stepsNumber < this.stepperConfig.currentStep) {
         this.stepperConfig.currentStep = 0;
@@ -268,7 +476,11 @@ export default {
       this.stepperConfig.currentStep--;
     },
 
-    createPatient() {},
+    async getPatientFields() {
+      let { data } = await patientFields();
+
+      this.fields = data.fields;
+    },
   },
 };
 </script>
