@@ -1,8 +1,8 @@
 <template>
   <f7-page name="firstAccess">
-    <f-block>
-      <f-row>
-        <f-col>
+    <f7-block>
+      <f7-row>
+        <f7-col>
           <div class="d-flex flex-column align-items-center justify-content-center wrapper">
             <svg width="123" height="135">
               <image class="logo" xlink:href="/assets/Logo.svg" />
@@ -19,9 +19,9 @@
               </f7-button>
             </div>
           </div>
-        </f-col>
-      </f-row>
-    </f-block>
+        </f7-col>
+      </f7-row>
+    </f7-block>
   </f7-page>
 </template>
 <script>

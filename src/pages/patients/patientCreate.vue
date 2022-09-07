@@ -222,7 +222,7 @@
                     v-for="(fieldName, key) of patientThirdStepFields"
                     :key="key"
                   >
-                    <f7-list no-hairlines class="m-0">
+                    <f7-list no-hairlines class="m-0" v-if="handleInputCheckType(fieldName)">
                       <f7-list-input
                         :name="fields[fieldName].name"
                         :label="fields[fieldName].label"
@@ -240,6 +240,21 @@
                           {{ option.label }}
                         </option>
                       </f7-list-input>
+                    </f7-list>
+
+                    <f7-list v-if="fields[fieldName].type === 'radio'">
+                      <small>{{ fields[fieldName].label }}</small>
+
+                      <div v-for="(radio, radioKey) of fields[fieldName].options" :key="radioKey">
+                        <small>{{ radio.label }}</small>
+                        <f7-radio
+                          :name="fields[fieldName].name"
+                          :value="radio.value"
+                          checked
+                          @change="handleRadioChange($event, fieldName)"
+                        >
+                        </f7-radio>
+                      </div>
                     </f7-list>
                   </f7-col>
                 </f7-row>
@@ -299,17 +314,17 @@ export default {
         rx: "",
         rxoutro: "",
         necropsia: "",
-        hiv: "",
-        diabetes: "",
-        alcoolismo: "",
-        mental: "",
-        drogadicao: "",
-        tabagismo: "",
+        hiv: "N",
+        diabetes: "N",
+        alcoolismo: "N",
+        mental: "N",
+        drogadicao: "N",
+        tabagismo: "N",
         aids: "",
         sensibility: "",
         treatment: "",
         initialExposure: "",
-        exposureChange: "",
+        exposureChange: "N",
         actualExposure: "",
         actualExposureReason: "",
         resistencia: "",
@@ -480,6 +495,28 @@ export default {
       let { data } = await patientFields();
 
       this.fields = data.fields;
+    },
+
+    handleRadioChange(event, fieldName) {
+      const value = event.target.value;
+
+      console.log({ value, fieldName });
+
+      // value === "S" ? (this.values[fieldName] = true) : (this.values[fieldName] = false);
+
+      this.values[fieldName] = value;
+    },
+
+    handleChecked(fieldName) {
+      if (!!this.values[fieldName].length) {
+        return false;
+      }
+
+      return !!this.values[fieldName] === "S";
+    },
+
+    handleInputCheckType(fieldName) {
+      return this.fields[fieldName].type === "input" || this.fields[fieldName].type === "select";
     },
   },
 };
