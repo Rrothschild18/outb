@@ -8,14 +8,15 @@
         </div>
       </template>
     </f7-navbar>
+
     <f7-block class="mt-3 mb-2">
       <section class="form">
         <h5 class="fw-bold">Passos:</h5>
 
-        <Stepper v-bind="stepperConfig" />
+        <Stepper v-bind="stepperConfig" id="top" />
 
-        <f7-tabs animated>
-          <f7-tab id="tab-1" tab-active v-if="stepperConfig.currentStep === 0">
+        <f7-tabs animated :style="handleTabStylesByStep">
+          <f7-tab id="tab-1" tab-active>
             <!-- STEP 1 -->
             <f7-row>
               <h5>Dados basicos</h5>
@@ -76,7 +77,7 @@
             </f7-row>
           </f7-tab>
 
-          <f7-tab id="tab-2" v-if="stepperConfig.currentStep === 1">
+          <f7-tab id="tab-2">
             <f7-row>
               <h5>Dados médicos</h5>
 
@@ -122,7 +123,7 @@
             </f7-row>
           </f7-tab>
 
-          <f7-tab id="tab-3" v-if="stepperConfig.currentStep === 2">
+          <f7-tab id="tab-3">
             <f7-row>
               <h5>Dados sobre a TB e comorbidades</h5>
 
@@ -166,7 +167,7 @@
                         <f7-radio
                           :name="fields[fieldName].name"
                           :value="radio.value"
-                          :checked="true"
+                          :checked="radio.value === values[fieldName]"
                           @change="handleRadioChange($event, fieldName)"
                         >
                         </f7-radio>
@@ -176,7 +177,7 @@
                 </f7-row>
 
                 <f7-col width="100">
-                  <f7-button fill class="Button w-100" @click="createPatient()">
+                  <f7-button fill class="Button w-100 mb-2" @click="createPatient()">
                     <span class="text-capitalize">Finalizar</span>
                   </f7-button>
                   <f7-button outline class="Button w-100" tab-link="#tab-2" @click="backStep()">
@@ -229,17 +230,17 @@ export default {
         rx: "",
         rxoutro: "",
         necropsia: "",
-        hiv: "N",
-        diabetes: "N",
-        alcoolismo: "N",
-        mental: "N",
-        drogadicao: "N",
-        tabagismo: "N",
+        hiv: false,
+        diabetes: false,
+        alcoolismo: false,
+        mental: false,
+        drogadicao: false,
+        tabagismo: false,
         aids: "",
         sensibility: "",
         treatment: "",
         initialExposure: "",
-        exposureChange: "N",
+        exposureChange: false,
         actualExposure: "",
         actualExposureReason: "",
         resistencia: "",
@@ -386,6 +387,26 @@ export default {
         histo: 100,
       };
     },
+
+    handleTabStylesByStep() {
+      const styles = {
+        maxHeight: "100%",
+      };
+
+      if (this.stepperConfig.currentStep === 0) {
+        styles.maxHeight = "610px";
+      }
+
+      if (this.stepperConfig.currentStep === 1) {
+        styles.maxHeight = "660px";
+      }
+
+      if (this.stepperConfig.currentStep === 2) {
+        styles.maxHeight = "100%";
+      }
+
+      return styles;
+    },
   },
 
   mounted() {
@@ -393,7 +414,10 @@ export default {
   },
 
   watch: {
-    "stepperConfig.currentStep": (newStep, oldStep) => {},
+    "stepperConfig.currentStep": (newStep, oldStep) => {
+      const el = document.querySelector("#top");
+      el.scrollIntoView();
+    },
   },
 
   methods: {
@@ -428,19 +452,7 @@ export default {
     handleRadioChange(event, fieldName) {
       const value = event.target.value;
 
-      console.log({ value, fieldName });
-
-      // value === "S" ? (this.values[fieldName] = true) : (this.values[fieldName] = false);
-
-      this.values[fieldName] = value;
-    },
-
-    handleChecked(fieldName) {
-      if (!!this.values[fieldName].length) {
-        return false;
-      }
-
-      return !!this.values[fieldName] === "S";
+      this.values[fieldName] = value === "true";
     },
 
     handleInputCheckType(fieldName) {
