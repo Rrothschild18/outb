@@ -80,7 +80,9 @@ export default {
     f7router: Object,
   },
 
-  mounted() {},
+  mounted() {
+    console.log(this.f7route.params.id);
+  },
 
   data() {
     return {

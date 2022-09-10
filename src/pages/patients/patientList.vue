@@ -23,9 +23,9 @@
           <f7-list-item
             link="#"
             chevron-center
-            v-for="({ name, type, status }, index) of patients"
+            v-for="({ id, name, type, status }, index) of patients2"
             :key="index"
-            @click="f7router.navigate({ name: 'PatientSingle', params: { id: 999 } })"
+            @click="f7router.navigate({ name: 'PatientSingle', params: { id } })"
           >
             <template #default>
               <section class="d-flex">
@@ -54,6 +54,7 @@
 </template>
 <script>
 import { setColor } from "../../helpers/colors";
+import { patientsList, patientFields } from "../../services";
 
 export default {
   props: {
@@ -61,10 +62,9 @@ export default {
     f7router: Object,
   },
 
-  mounted() {},
-
   data() {
     return {
+      fields: {},
       patients: [
         { name: "P #18062022", type: "Novo", status: "red" },
         { name: "P #19062020", type: "Reicidiva", status: "blue" },
@@ -76,7 +76,13 @@ export default {
         { name: "P #19062020", type: "Recidiva", status: "success" },
         { name: "P #19062020", type: "Recidiva", status: "blue" },
       ],
+      patients2: [],
     };
+  },
+
+  mounted() {
+    this.getPatientFields();
+    this.getPatientList();
   },
 
   methods: {
@@ -84,6 +90,36 @@ export default {
 
     statusColor(status) {
       return { backgroundColor: `${this.setColor(status)}` };
+    },
+
+    generateRandomStatus() {
+      const rNumber = Math.floor(Math.random() * (5 - 0) + 0);
+
+      const possibleStatuses = ["blue", "yellow", "red", "success", "gray"];
+
+      return possibleStatuses[rNumber];
+    },
+
+    async getPatientList() {
+      const { data } = await patientsList();
+
+      this.patients2 = [
+        ...data.map((patient) => {
+          return {
+            id: patient.id,
+            name: patient.name.split(" ")[0] || `P #${patient.id}`,
+            type: this.fields.type.options.find((option) => option.value === patient.type).label || "-",
+            status: this.generateRandomStatus(),
+          };
+        }),
+        ...this.patients,
+      ];
+    },
+
+    async getPatientFields() {
+      let { data } = await patientFields();
+
+      this.fields = data.fields;
     },
   },
 };

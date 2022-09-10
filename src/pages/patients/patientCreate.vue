@@ -177,7 +177,7 @@
                 </f7-row>
 
                 <f7-col width="100">
-                  <f7-button fill class="Button w-100 mb-2" @click="createPatient()">
+                  <f7-button fill class="Button w-100 mb-2" @click="onSubmissionForm()">
                     <span class="text-capitalize">Finalizar</span>
                   </f7-button>
                   <f7-button outline class="Button w-100" tab-link="#tab-2" @click="backStep()">
@@ -193,7 +193,8 @@
   </f7-page>
 </template>
 <script>
-import { patientFields } from "../../services";
+import { patientFields, createPatient } from "../../services";
+import { toRaw } from "vue";
 
 export default {
   props: {
@@ -465,6 +466,16 @@ export default {
 
     isRadio(fieldName) {
       return this.fields[fieldName].type === "radio";
+    },
+
+    async onSubmissionForm() {
+      const data = toRaw(this.values);
+
+      const response = await createPatient(data);
+
+      console.log(response);
+
+      this.f7router.navigate("/login/");
     },
   },
 };

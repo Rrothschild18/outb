@@ -1,6 +1,19 @@
 import api from "./index";
 
-export const createPatient = () => {};
+export const patientsList = () => {
+  return api({
+    url: "patients",
+    method: "GET",
+  });
+};
+
+export const createPatient = (data) => {
+  return api({
+    url: "patients",
+    data,
+    method: "POST",
+  });
+};
 
 export const editPatient = () => {};
 
