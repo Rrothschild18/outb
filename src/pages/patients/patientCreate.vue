@@ -206,46 +206,13 @@ export default {
     return {
       fields: {},
       values: {
-        name: "",
-        occupation: "",
-        age: "",
-        race: "",
-        gender: "",
-        schooling: "",
-        currentSituation: "",
-        lastTreatmentCode: "",
-        lastTreatment: "",
-        totComunic: "",
-        totComunicEx: "",
-        totComunicAd: "",
-        instTrat: "",
-        type: "",
-        manifest: "",
-        manifestTwo: "",
-        manifestThree: "",
-        classification: "",
-        discoveryType: "",
-        bac: "",
-        cultEsc: "",
-        cultOutro: "",
-        rx: "",
-        rxoutro: "",
-        necropsia: "",
-        hiv: false,
-        diabetes: false,
-        alcoolismo: false,
-        mental: false,
-        drogadicao: false,
-        tabagismo: false,
-        aids: "",
-        sensibility: "",
-        treatment: "",
-        initialExposure: "",
-        exposureChange: false,
-        actualExposure: "",
-        actualExposureReason: "",
-        resistencia: "",
-        histo: "",
+        HIV: false,
+        DIABETES: false,
+        ALCOOLISMO: false,
+        DOENCA_MENTAL: false,
+        USO_DROGAS: false,
+        TABAGISMO: false,
+        ESQUEMA_INICIAL: false,
       },
 
       stepperConfig: {
@@ -282,110 +249,127 @@ export default {
     patientFirstStepFields() {
       return [
         "name",
-        "occupation",
-        "lastTreatmentCode",
-        "age",
-        "race",
-        "gender",
-        "schooling",
-        "lastTreatment",
-        "currentSituation",
-        "totComunic",
-        "totComunicEx",
-        "totComunicAd",
+        "TIPO_OCUPACAO",
+        "CODIGO_TRATAMENTO_ANTERIOR",
+        "IDADE",
+        "MUNICIPIO_RESIDENCIA",
+        "FAIXA_ETARIA",
+        "RACA_COR",
+        "SEXO",
+        "GESTANTE",
+        "ESCOLARIDADE",
+        "TEMPO_TRAMENTO_ANTERIOR",
+        "SITUACAO_ATUAL",
+        "TOTCOMUNIC",
+        "COMUNICEXA",
+        "COMUNICDO",
       ];
     },
 
     patientFirstStepColumns() {
       return {
         name: 100,
-        occupation: 100,
-        age: 50,
-        race: 50,
-        gender: 50,
-        schooling: 50,
-        currentSituation: 50,
-        lastTreatmentCode: 100,
-        lastTreatment: 50,
-        totComunic: 100,
-        totComunicEx: 100,
-        totComunicAd: 100,
+        TIPO_OCUPACAO: 100,
+        FAIXA_ETARIA: 50,
+        IDADE: 50,
+        MUNICIPIO_RESIDENCIA: 50,
+        RACA_COR: 50,
+        SEXO: 50,
+        GESTANTE: 100,
+        ESCOLARIDADE: 50,
+        SITUACAO_ATUAL: 100,
+        CODIGO_TRATAMENTO_ANTERIOR: 100,
+        TEMPO_TRAMENTO_ANTERIOR: 50,
+        TOTCOMUNIC: 100,
+        COMUNICEXA: 100,
+        COMUNICDO: 100,
       };
     },
 
     patientSecondStepFields() {
       return [
-        "instTrat",
-        "type",
-        "manifest",
-        "manifestTwo",
-        "manifestThree",
-        "classification",
-        "bac",
-        "discoveryType",
-        "cultEsc",
-        "cultOutro",
-        "rx",
-        "rxoutro",
-        "necropsia",
+        "INSTITUTO_TRATAMENTO",
+        "TIPO_CASO",
+        "FORMA_CLINICA_1",
+        "CLASSIFICACAO",
+        "BACILOSCOPIA_ESCARRO",
+        "DESCOBERTA",
+        "TIPO_TRATAMENTO",
+        "CULTURA_ESCARRO",
+        "CULTURA_OUTRO_MATERIAL",
+        "RX_TORAX",
+        "RX_OUTRO",
+        "NECROPSIA",
       ];
     },
 
     patientSecondStepColumns() {
       return {
-        instTrat: 100,
-        type: 100,
-        manifest: 100,
-        manifestTwo: 50,
-        manifestThree: 50,
-        discoveryType: 100,
-        classification: 50,
-        bac: 50,
-        cultEsc: 50,
-        cultOutro: 50,
-        rx: 100,
-        rxoutro: 50,
-        necropsia: 50,
+        INSTITUTO_TRATAMENTO: 100,
+        TIPO_CASO: 100,
+        FORMA_CLINICA_1: 100,
+        DESCOBERTA: 100,
+        TIPO_TRATAMENTO: 100,
+        CLASSIFICACAO: 50,
+        BACILOSCOPIA_ESCARRO: 50,
+        CULTURA_ESCARRO: 50,
+        CULTURA_OUTRO_MATERIAL: 50,
+        RX_TORAX: 100,
+        RX_OUTRO: 50,
+        NECROPSIA: 50,
+        NRO_DOSES_PRI: 100,
+        NRO_DOSES_SEG: 100,
+        MOTIVO_INTERNACAO_1: 100,
+        TIPO_SAIDA_1: 100,
       };
     },
 
     patientThirdStepFields() {
       return [
-        "sensibility",
-        "treatment",
-        "initialExposure",
-        "resistencia",
-        "histo",
-        "actualExposure",
-        "actualExposureReason",
-        "exposureChange",
-        "hiv",
-        "diabetes",
-        "alcoolismo",
-        "drogadicao",
-        "tabagismo",
-        "aids",
-        "mental",
+        "TESTE_SENSIBILIDADE",
+        "RESISTENCIA",
+        "HISTOPATOLOGIA",
+        "ESQUEMA_INICIAL",
+        "ESQUEMA_ATUAL",
+        "MUDANCA_ESQUEMA",
+        "MOTIVO_MUDANCA_ESQUEMA",
+        "HIV",
+        "DIABETES",
+        "ALCOOLISMO",
+        "USO_DROGAS",
+        "TABAGISMO",
+        "OUTRAS_DOENCAS_IMUNO",
+        "AIDS",
+        "DOENCA_MENTAL",
+        "NRO_DOSES_PRI",
+        "NRO_DOSES_SEG",
+        "MOTIVO_INTERNACAO_1",
+        "TIPO_SAIDA_1",
       ];
     },
 
     patientThirdStepColumns() {
       return {
-        hiv: 100,
-        diabetes: 100,
-        alcoolismo: 100,
-        mental: 100,
-        drogadicao: 100,
-        tabagismo: 100,
-        aids: 100,
-        sensibility: 100,
-        treatment: 100,
-        initialExposure: 100,
-        exposureChange: 100,
-        actualExposure: 100,
-        actualExposureReason: 100,
-        resistencia: 100,
-        histo: 100,
+        HIV: 100,
+        DIABETES: 100,
+        ALCOOLISMO: 100,
+        DOENCA_MENTAL: 100,
+        USO_DROGAS: 100,
+        TABAGISMO: 100,
+        OUTRAS_DOENCAS_IMUNO: 100,
+        AIDS: 100,
+        TESTE_SENSIBILIDADE: 100,
+        ESQUEMA_INICIAL: 100,
+        MOTIVO_MUDANCA_ESQUEMA: 100,
+        ESQUEMA_ATUAL: 100,
+        MUDANCA_ESQUEMA: 100,
+        RESISTENCIA: 100,
+        HISTOPATOLOGIA: 100,
+        DOENCA_MENTAL: 100,
+        NRO_DOSES_PRI: 100,
+        NRO_DOSES_SEG: 100,
+        MOTIVO_INTERNACAO_1: 100,
+        TIPO_SAIDA_1: 100,
       };
     },
 
@@ -394,17 +378,17 @@ export default {
         maxHeight: "100%",
       };
 
-      if (this.stepperConfig.currentStep === 0) {
-        styles.maxHeight = "610px";
-      }
+      // if (this.stepperConfig.currentStep === 0) {
+      //   styles.maxHeight = "610px";
+      // }
 
-      if (this.stepperConfig.currentStep === 1) {
-        styles.maxHeight = "660px";
-      }
+      // if (this.stepperConfig.currentStep === 1) {
+      //   styles.maxHeight = "660px";
+      // }
 
-      if (this.stepperConfig.currentStep === 2) {
-        styles.maxHeight = "100%";
-      }
+      // if (this.stepperConfig.currentStep === 2) {
+      //   styles.maxHeight = "100%";
+      // }
 
       return styles;
     },
@@ -457,11 +441,7 @@ export default {
     },
 
     handleInputCheckType(fieldName) {
-      return (
-        this.fields[fieldName].type === "input" ||
-        this.fields[fieldName].type === "select" ||
-        this.fields[fieldName].type === "text"
-      );
+      return this.fields[fieldName]?.type === "select" || this.fields[fieldName]?.type === "text";
     },
 
     isRadio(fieldName) {
