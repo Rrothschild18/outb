@@ -23,7 +23,7 @@
           <f7-list-item
             link="#"
             chevron-center
-            v-for="({ id, name, type, status }, index) of patients2"
+            v-for="({ id, name, type, status }, index) of patients"
             :key="index"
             @click="f7router.navigate({ name: 'PatientSingle', params: { id } })"
           >
@@ -65,18 +65,7 @@ export default {
   data() {
     return {
       fields: {},
-      patients: [
-        { name: "P #18062022", type: "Novo", status: "red" },
-        { name: "P #19062020", type: "Reicidiva", status: "blue" },
-        { name: "P #11062010", type: "Novo", status: "yellow" },
-        { name: "P #30062022", type: "Retorno abandono", status: "green" },
-        { name: "P #12262022", type: "Retrat mud esquema int/tox", status: "gray" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-        { name: "P #19062020", type: "Recidiva", status: "success" },
-        { name: "P #19062020", type: "Recidiva", status: "success" },
-        { name: "P #19062020", type: "Recidiva", status: "blue" },
-      ],
-      patients2: [],
+      patients: [],
     };
   },
 
@@ -103,16 +92,15 @@ export default {
     async getPatientList() {
       const { data } = await patientsList();
 
-      this.patients2 = [
+      this.patients = [
         ...data.map((patient) => {
           return {
             id: patient.id,
             name: patient.name.split(" ")[0] || `P #${patient.id}`,
-            type: this.fields.type.options.find((option) => option.value === patient.type).label || "-",
+            type: this.fields.TIPO_CASO.options.find((option) => option.value === patient.TIPO_CASO).label || "-",
             status: this.generateRandomStatus(),
           };
         }),
-        ...this.patients,
       ];
     },
 
