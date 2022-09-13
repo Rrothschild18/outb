@@ -19,33 +19,36 @@
           :form="false"
         ></f7-searchbar>
 
+        <Loader absolute v-if="loading" />
         <f7-list media-list class="PatientList no-hairline mb-3" virtual-list no-hairlines>
-          <f7-list-item
-            link="#"
-            chevron-center
-            v-for="({ id, name, type, status }, index) of patients"
-            :key="index"
-            @click="f7router.navigate({ name: 'PatientSingle', params: { id } })"
-          >
-            <template #default>
-              <section class="d-flex">
-                <div>
-                  <div
-                    class="patient-list-item d-flex align-items-center justify-content-center rounded"
-                    :style="statusColor(status)"
-                  >
-                    <svg width="25" height="35">
-                      <image class="logo" xlink:href="/assets/patient-list.svg" />
-                    </svg>
+          <f7-list-item v-if="!loading">
+            <f7-list-item
+              link="#"
+              chevron-center
+              v-for="({ id, name, type, status }, index) of patients"
+              :key="index"
+              @click="f7router.navigate({ name: 'PatientSingle', params: { id } })"
+            >
+              <template #default>
+                <section class="d-flex">
+                  <div>
+                    <div
+                      class="patient-list-item d-flex align-items-center justify-content-center rounded"
+                      :style="statusColor(status)"
+                    >
+                      <svg width="25" height="35">
+                        <image class="logo" xlink:href="/assets/patient-list.svg" />
+                      </svg>
+                    </div>
                   </div>
-                </div>
 
-                <div class="d-flex flex-column ms-5 h-70 justify-content-center">
-                  <h4 class="mb-0">{{ name }}</h4>
-                  <h6 class="mb-0 text-gray-dark">{{ type }}</h6>
-                </div>
-              </section>
-            </template>
+                  <div class="d-flex flex-column ms-5 h-70 justify-content-center">
+                    <h4 class="mb-0">{{ name }}</h4>
+                    <h6 class="mb-0 text-gray-dark">{{ type }}</h6>
+                  </div>
+                </section>
+              </template>
+            </f7-list-item>
           </f7-list-item>
         </f7-list>
       </section>
@@ -66,6 +69,7 @@ export default {
     return {
       fields: {},
       patients: [],
+      loading: true,
     };
   },
 
@@ -90,23 +94,30 @@ export default {
     },
 
     async getPatientList() {
-      const { data } = await patientsList();
+      try {
+        let { data } = await patientsList();
 
-      this.patients = [
-        ...data.map((patient) => {
-          return {
-            id: patient.id,
-            name: patient.name.split(" ")[0] || `P #${patient.id}`,
-            type: this.fields.TIPO_CASO.options.find((option) => option.value === patient.TIPO_CASO).label || "-",
-            status: this.generateRandomStatus(),
-          };
-        }),
-      ];
+        setTimeout(() => {
+          this.patients = [
+            ...data.map((patient) => {
+              return {
+                id: patient.id,
+                name: patient.name.split(" ")[0] || `P #${patient.id}`,
+                type: this.fields.TIPO_CASO?.options.find((option) => option.value === patient.TIPO_CASO).label || "-",
+                status: this.generateRandomStatus(),
+              };
+            }),
+          ];
+          this.loading = false;
+        }, 2000);
+      } catch (e) {
+        console.log(e);
+      } finally {
+      }
     },
 
     async getPatientFields() {
       let { data } = await patientFields();
-
       this.fields = data.fields;
     },
   },
@@ -134,6 +145,7 @@ export default {
 .PatientList {
   overflow-y: scroll;
   max-height: 500px;
+  height: 500px;
 
   .patient-list-item {
     height: 70px;

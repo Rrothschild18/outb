@@ -4,8 +4,19 @@ export const patientsList = () => {
   return api({
     url: "patients",
     method: "GET",
+    params: {
+      limit: 10,
+      page: 1,
+    },
   });
 };
+
+// export const patientsList = () => {
+//   return api({
+//     url: "patients",
+//     method: "GET",
+//   });
+// };
 
 export const createPatient = (data) => {
   return api({
