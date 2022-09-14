@@ -16,7 +16,12 @@
         <f7-card
           class="m-0 mt-5 status-card"
           :padding="false"
-          @click="f7router.navigate({ name: 'PatientSingle', params: { id: 999 } })"
+          @click="
+            f7router.navigate({
+              name: 'PatientSingle',
+              params: { id: 999 },
+            })
+          "
         >
           <template #content>
             <f7-button class="status-button" color="yellow">
@@ -122,6 +127,19 @@
         </div>
       </section>
     </f7-block>
+
+    <f7-fab
+      position="right-bottom"
+      color="primary"
+      @click="
+        f7router.navigate({
+          name: 'PatientEdit',
+          params: { id: 'zsWjGgS' },
+        })
+      "
+    >
+      <f7-icon ios="f7:plus" color="white" aurora="f7:plus" md="material:add"></f7-icon>
+    </f7-fab>
   </f7-page>
 </template>
 <script>

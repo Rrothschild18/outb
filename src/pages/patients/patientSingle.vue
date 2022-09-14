@@ -74,6 +74,8 @@
   </f7-page>
 </template>
 <script>
+import { patientFields, patientById } from "../../services";
+
 export default {
   props: {
     f7route: Object,

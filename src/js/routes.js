@@ -38,6 +38,11 @@ var routes = [
     component: PatientCreate,
   },
   {
+    name: "PatientEdit",
+    path: "/patients/:id/edit",
+    component: PatientCreate,
+  },
+  {
     name: "PatientSingle",
     path: "/patients/:id",
     component: PatientSingle,

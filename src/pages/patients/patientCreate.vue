@@ -193,7 +193,14 @@
   </f7-page>
 </template>
 <script>
-import { patientFields, createPatient } from "../../services";
+import {
+  patientFields,
+  createPatient,
+  patientById,
+  newStatus,
+  patchStatus,
+  getStatusByPatientId,
+} from "../../services";
 import { toRaw } from "vue";
 
 export default {
@@ -236,6 +243,10 @@ export default {
   computed: {
     hasFields() {
       return !!Object.keys(this.fields).length;
+    },
+
+    patientId() {
+      return this.f7route.params.id;
     },
 
     hasFieldOptions(field) {
@@ -373,6 +384,14 @@ export default {
       };
     },
 
+    isEditMode() {
+      const path = this.f7route.path;
+      const pathSplitted = path.split("/");
+      const action = pathSplitted[pathSplitted.length - 1];
+
+      return action === "edit";
+    },
+
     handleTabStylesByStep() {
       const styles = {
         maxHeight: "100%",
@@ -396,6 +415,10 @@ export default {
 
   mounted() {
     this.getPatientFields();
+
+    if (this.f7route.params.id) {
+      this.getPatientById(this.f7route.params.id);
+    }
   },
 
   watch: {
@@ -434,6 +457,28 @@ export default {
       this.fields = data.fields;
     },
 
+    async getPatientById(id) {
+      let { data } = await patientById(id);
+
+      delete data.id;
+
+      this.values = data;
+    },
+
+    async getPatientStatusById(id) {
+      let { data } = await patientByStatusId(id);
+
+      console.log(data);
+
+      this.values = data;
+    },
+
+    async createPatientStatus(statusData) {
+      let { data } = await newStatus(statusData);
+
+      return data;
+    },
+
     handleRadioChange(event, fieldName) {
       const value = event.target.value;
 
@@ -451,10 +496,41 @@ export default {
     async onSubmissionForm() {
       const data = toRaw(this.values);
 
+      if (this.isEditMode) {
+        //post a new status
+        console.log("send to status");
+
+        let data = await this.createPatientStatus({
+          ...this.values,
+          lastStatusId: null,
+          patientId: this.patientId,
+        });
+
+        let { data: statusList } = await getStatusByPatientId(this.patientId);
+
+        patchStatus(
+          {
+            lastStatusId: statusList[statusList.length - 2]?.id || null,
+            nextStatusId: null,
+          },
+          data.id
+        );
+
+        if (statusList.length > 1) {
+          patchStatus(
+            {
+              nextStatusId: data.id,
+            },
+            statusList[statusList.length - 2]?.id || null
+          );
+          return;
+        }
+
+        return;
+      }
+
       const response = await createPatient(data);
-
       console.log(response);
-
       this.f7router.navigate("/login/");
     },
   },
