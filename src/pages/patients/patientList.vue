@@ -27,7 +27,7 @@
               chevron-center
               v-for="({ id, name, type, status }, index) of patients"
               :key="index"
-              @click="f7router.navigate({ name: 'PatientSingle', params: { id } })"
+              @click="f7router.navigate({ name: 'PatientStatus', params: { id } })"
             >
               <template #default>
                 <section class="d-flex">
@@ -109,7 +109,7 @@ export default {
             }),
           ];
           this.loading = false;
-        }, 2000);
+        }, 0);
       } catch (e) {
         console.log(e);
       } finally {
