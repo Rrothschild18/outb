@@ -67,13 +67,14 @@
                       </div>
                     </f7-list>
                   </f7-col>
-                  <f7-col width="100">
-                    <f7-button fill class="Button w-100" tab-link="#tab-2" @click="nextStep()">
-                      <span class="text-capitalize">Prosseguir</span>
-                    </f7-button>
-                  </f7-col>
                 </f7-row>
               </form>
+
+              <f7-col width="100">
+                <f7-button fill class="Button w-100" tab-link="#tab-2" @click="nextStep()">
+                  <span class="text-capitalize">Prosseguir</span>
+                </f7-button>
+              </f7-col>
             </f7-row>
           </f7-tab>
 
@@ -111,16 +112,16 @@
                   </f7-col>
                 </f7-row>
               </form>
-
-              <f7-col width="100">
-                <f7-button fill class="Button w-100 mb-2" tab-link="#tab-3" @click="nextStep()">
-                  <span class="text-capitalize">Prosseguir</span>
-                </f7-button>
-                <f7-button outline class="Button w-100" tab-link="#tab-1" @click="backStep()">
-                  <span class="text-capitalize">Voltar</span>
-                </f7-button>
-              </f7-col>
             </f7-row>
+
+            <f7-col width="100">
+              <f7-button fill class="Button w-100 mb-2" tab-link="#tab-3" @click="nextStep()">
+                <span class="text-capitalize">Prosseguir</span>
+              </f7-button>
+              <f7-button outline class="Button w-100" tab-link="#tab-1" @click="backStep()">
+                <span class="text-capitalize">Voltar</span>
+              </f7-button>
+            </f7-col>
           </f7-tab>
 
           <f7-tab id="tab-3">
@@ -175,16 +176,16 @@
                     </f7-list>
                   </f7-col>
                 </f7-row>
-
-                <f7-col width="100">
-                  <f7-button fill class="Button w-100 mb-2" @click="onSubmissionForm()">
-                    <span class="text-capitalize">Finalizar</span>
-                  </f7-button>
-                  <f7-button outline class="Button w-100" tab-link="#tab-2" @click="backStep()">
-                    <span class="text-capitalize">Voltar</span>
-                  </f7-button>
-                </f7-col>
               </form>
+
+              <f7-col width="100">
+                <f7-button fill class="Button w-100 mb-2" @click="onSubmissionForm()">
+                  <span class="text-capitalize">Finalizar</span>
+                </f7-button>
+                <f7-button outline class="Button w-100" tab-link="#tab-2" @click="backStep()">
+                  <span class="text-capitalize">Voltar</span>
+                </f7-button>
+              </f7-col>
             </f7-row>
           </f7-tab>
         </f7-tabs>
@@ -402,17 +403,17 @@ export default {
         maxHeight: "100%",
       };
 
-      // if (this.stepperConfig.currentStep === 0) {
-      //   styles.maxHeight = "610px";
-      // }
+      if (this.stepperConfig.currentStep === 0) {
+        styles.maxHeight = `${600 + 72}px`;
+      }
 
-      // if (this.stepperConfig.currentStep === 1) {
-      //   styles.maxHeight = "660px";
-      // }
+      if (this.stepperConfig.currentStep === 1) {
+        styles.maxHeight = "660px";
+      }
 
-      // if (this.stepperConfig.currentStep === 2) {
-      //   styles.maxHeight = "100%";
-      // }
+      if (this.stepperConfig.currentStep === 2) {
+        styles.maxHeight = "100%";
+      }
 
       return styles;
     },
