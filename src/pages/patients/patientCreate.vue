@@ -219,7 +219,12 @@ export default {
         DOENCA_MENTAL: false,
         USO_DROGAS: false,
         TABAGISMO: false,
-        ESQUEMA_INICIAL: false,
+        SEXO: "",
+        MUDANCA_ESQUEMA: false,
+        USO_DROGAS: false,
+        MUDANCA_ESQUEMA: false,
+        OUTRAS_DOENCAS_IMUNO: false,
+        AIDS: false,
       },
 
       stepperConfig: {
@@ -261,32 +266,32 @@ export default {
       return [
         "name",
         "TIPO_OCUPACAO",
-        "CODIGO_TRATAMENTO_ANTERIOR",
         "IDADE",
+        "CODIGO_TRATAMENTO_ANTERIOR",
         "MUNICIPIO_RESIDENCIA",
-        "FAIXA_ETARIA",
+        // "FAIXA_ETARIA", Removido por nao precisar preencher
         "RACA_COR",
         "SEXO",
-        "GESTANTE",
+        this.showFieldPregnantField(),
         "ESCOLARIDADE",
         "TEMPO_TRAMENTO_ANTERIOR",
         "SITUACAO_ATUAL",
         "TOTCOMUNIC",
         "COMUNICEXA",
         "COMUNICDO",
-      ];
+      ].filter((fieldName) => fieldName !== null);
     },
 
     patientFirstStepColumns() {
       return {
         name: 100,
-        TIPO_OCUPACAO: 100,
-        FAIXA_ETARIA: 50,
+        TIPO_OCUPACAO: 50,
+        // FAIXA_ETARIA: 50,
         IDADE: 50,
         MUNICIPIO_RESIDENCIA: 50,
         RACA_COR: 50,
         SEXO: 50,
-        GESTANTE: 100,
+        GESTANTE: 50,
         ESCOLARIDADE: 50,
         SITUACAO_ATUAL: 100,
         CODIGO_TRATAMENTO_ANTERIOR: 100,
@@ -307,11 +312,11 @@ export default {
         "DESCOBERTA",
         "TIPO_TRATAMENTO",
         "CULTURA_ESCARRO",
-        "CULTURA_OUTRO_MATERIAL",
+        this.showFieldBasedOnOtherIsAnswered("CULTURA_ESCARRO", "CULTURA_OUTRO_MATERIAL"),
         "RX_TORAX",
-        "RX_OUTRO",
+        this.showFieldBasedOnOtherIsAnswered("RX_TORAX", "RX_OUTRO"),
         "NECROPSIA",
-      ];
+      ].filter((fieldName) => fieldName !== null);
     },
 
     patientSecondStepColumns() {
@@ -325,7 +330,7 @@ export default {
         BACILOSCOPIA_ESCARRO: 50,
         CULTURA_ESCARRO: 50,
         CULTURA_OUTRO_MATERIAL: 50,
-        RX_TORAX: 100,
+        RX_TORAX: 50,
         RX_OUTRO: 50,
         NECROPSIA: 50,
         NRO_DOSES_PRI: 100,
@@ -341,9 +346,9 @@ export default {
         "RESISTENCIA",
         "HISTOPATOLOGIA",
         "ESQUEMA_INICIAL",
-        "ESQUEMA_ATUAL",
         "MUDANCA_ESQUEMA",
-        "MOTIVO_MUDANCA_ESQUEMA",
+        this.showFieldBasedOnOtherIsAnswered("MUDANCA_ESQUEMA", "MOTIVO_MUDANCA_ESQUEMA"),
+        this.showFieldBasedOnOtherIsAnswered("MUDANCA_ESQUEMA", "ESQUEMA_ATUAL"),
         "HIV",
         "DIABETES",
         "ALCOOLISMO",
@@ -356,7 +361,7 @@ export default {
         "NRO_DOSES_SEG",
         "MOTIVO_INTERNACAO_1",
         "TIPO_SAIDA_1",
-      ];
+      ].filter((fieldName) => fieldName !== null);
     },
 
     patientThirdStepColumns() {
@@ -426,6 +431,22 @@ export default {
       const el = document.querySelector("#top");
       el.scrollIntoView();
     },
+
+    "values.SEXO": {
+      handler(newValue) {
+        if (newValue === "M" || newValue === "") {
+          this.values.GESTANTE = "";
+        }
+      },
+    },
+
+    "values.IDADE": {
+      handler(newValue) {
+        const parsedAge = this.parseAge(newValue);
+
+        this.values.FAIXA_ETARIA = this.fields["FAIXA_ETARIA"].options.find(({ value }) => value === parsedAge).value;
+      },
+    },
   },
 
   methods: {
@@ -486,7 +507,7 @@ export default {
     },
 
     handleInputCheckType(fieldName) {
-      return this.fields[fieldName]?.type === "select" || this.fields[fieldName]?.type === "text";
+      return ["text", "select", "number"].includes(this.fields[fieldName]?.type);
     },
 
     isRadio(fieldName) {
@@ -532,6 +553,63 @@ export default {
       const response = await createPatient(data);
       console.log(response);
       this.f7router.navigate("/login/");
+    },
+
+    showFieldPregnantField() {
+      return this.values["SEXO"] === "M" || this.values["SEXO"] === "" ? null : "GESTANTE";
+    },
+
+    parseAge(age) {
+      const ages = [
+        { key: 1, value: "01-04", index: 0 },
+        { key: 4, value: "01-04", index: 1 },
+        { key: 5, value: "05-09", index: 2 },
+        { key: 9, value: "05-09", index: 3 },
+        { key: 10, value: "10-14", index: 4 },
+        { key: 14, value: "10-14", index: 5 },
+        { key: 15, value: "15-19", index: 6 },
+        { key: 19, value: "15-19", index: 7 },
+        { key: 20, value: "20-29", index: 8 },
+        { key: 29, value: "20-29", index: 9 },
+        { key: 30, value: "30-39", index: 10 },
+        { key: 39, value: "30-39", index: 11 },
+        { key: 40, value: "40-49", index: 12 },
+        { key: 49, value: "40-49", index: 13 },
+        { key: 50, value: "50-59", index: 14 },
+        { key: 59, value: "50-59", index: 15 },
+        { key: 60, value: "60-69", index: 16 },
+        { key: 69, value: "60-69", index: 17 },
+        { key: 70, value: "70-79", index: 18 },
+        { key: 79, value: "70-79", index: 19 },
+      ];
+
+      if (age < 4) {
+        return "MENOR DE 1 ANO";
+      }
+
+      if (age > 80) {
+        return "MAIOR DE 80 ANOS";
+      }
+
+      for (const { key, index } of ages) {
+        const isHigherThanMin = age > key;
+        const isLowerThanMax = !(age < ages[index + 1].key);
+
+        const isBetween = isHigherThanMin && isLowerThanMax;
+
+        if (!isBetween) {
+          return ages[index].value;
+          break;
+        }
+      }
+    },
+
+    showFieldBasedOnOtherIsAnswered(fieldNameToCompare, fieldToShow) {
+      if (typeof this.values[fieldNameToCompare] === "boolean") {
+        return this.values[fieldNameToCompare] ? fieldToShow : null;
+      }
+
+      return !!this.values[fieldNameToCompare]?.length ? fieldToShow : null;
     },
   },
 };
