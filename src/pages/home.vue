@@ -14,7 +14,11 @@
         <f7-col>
           <section class="mb-8">
             <h4 class="text-primary fw-bold d-block mb-0">OUTb</h4>
-            <h5 class="mb-0">é uma ferramenta de assistência médica para tuberculose</h5>
+            <h5 class="mb-0">
+              offers insights using machine learning algorithms to combat tuberculosis. It provides an overview of the
+              different algorithms available and how they can support healthcare professionals in improving diagnoses
+              and manage TB more effectively.
+            </h5>
           </section>
 
           <section>
@@ -75,7 +79,7 @@
               </f7-col>
 
               <f7-col width="50" class="mb-3">
-                <f7-card class="m-0 border" no-shadow>
+                <f7-card class="m-0 border" no-shadow @click="f7router.navigate({ name: 'AlgorithmsList' })">
                   <template #content>
                     <div class="menu-content">
                       <div

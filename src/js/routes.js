@@ -2,6 +2,7 @@ import SplashPage from "../pages/splash.vue";
 import HomePage from "../pages/home.vue";
 import NotFoundPage from "../pages/404.vue";
 import FirstAccess from "../pages/firstAccess.vue";
+import Algorithms from "../pages/algorithms.vue";
 import Login from "../pages/login.vue";
 
 //Patient
@@ -51,6 +52,11 @@ var routes = [
     name: "PatientList",
     path: "/patients/",
     component: PatientList,
+  },
+  {
+    name: "AlgorithmsList",
+    path: "/algorithms/",
+    component: Algorithms,
   },
   {
     path: "(.*)",
