@@ -11,6 +11,8 @@ import PatientCreate from "../pages/patients/patientCreate.vue";
 import PatientSingle from "../pages/patients/patientSingle.vue";
 import PatientList from "../pages/patients/patientList.vue";
 
+import OutcomeHome from "../pages/algorithms/outcomes/outcomeHome.vue";
+
 var routes = [
   {
     path: "/",
@@ -57,6 +59,11 @@ var routes = [
     name: "AlgorithmsList",
     path: "/algorithms/",
     component: Algorithms,
+  },
+  {
+    name: "OutcomeHome",
+    path: "/algorithms/:id/outcome",
+    component: OutcomeHome,
   },
   {
     path: "(.*)",

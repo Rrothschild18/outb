@@ -23,7 +23,12 @@
         <f7-col width="100" class="mb-3">
           <f7-card class="m-0 border no-shadow" :padding="false">
             <template #content>
-              <f7-button class="py-6 px-4 algorithm-list-button">
+              <f7-button
+                class="py-6 px-4 algorithm-list-button"
+                @click="
+                  f7router.navigate({ name: 'OutcomeHome', params: { id: 'f2e38111-d571-4940-8ea7-1e3d677a0f02' } })
+                "
+              >
                 <div class="d-flex justify-content-between align-items-center w-100">
                   <h4 class="fw-bold text-gray-dark mb-0">Outcomes</h4>
                   <f7-icon material="chevron_right" class="status-icon"></f7-icon>
