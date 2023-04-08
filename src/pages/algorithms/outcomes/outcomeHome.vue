@@ -55,7 +55,7 @@
                   @click="
                     f7router.navigate({
                       name: 'OutcomeForm',
-                      params: { id: 'f2e38111-d571-4940-8ea7-1e3d677a0f02', mode: 'create' },
+                      params: { algorithmId, mode: 'create' },
                     })
                   "
                 >
@@ -115,6 +115,8 @@
   </f7-page>
 </template>
 <script>
+import { f7 } from "framework7-vue";
+
 export default {
   props: {
     f7route: Object,
@@ -123,6 +125,12 @@ export default {
 
   data() {
     return {};
+  },
+
+  computed: {
+    algorithmId() {
+      return f7.store.state.algorithm.id;
+    },
   },
 
   methods: {},

@@ -82,7 +82,7 @@ var routes = [
   },
   {
     name: "OutcomeForm",
-    path: "/algorithms/:id/outcomes/create",
+    path: "/algorithms/:algorithmId/outcomes/create",
     component: OutcomeForm,
   },
   {

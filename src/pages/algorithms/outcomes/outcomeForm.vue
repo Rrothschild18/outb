@@ -252,6 +252,10 @@ export default {
   },
 
   computed: {
+    algorithmId() {
+      return f7.store.state.algorithm.id;
+    },
+
     hasFields() {
       return !!Object.keys(this.fields).length;
     },
@@ -490,8 +494,6 @@ export default {
     async getLastOutcomeStatusByPatientId(patientId) {
       let { data } = await lastOutcomeStatusByPatientId(patientId);
 
-      delete data.id;
-
       this.values = data;
     },
 
@@ -524,51 +526,49 @@ export default {
     },
 
     async onSubmissionForm() {
-      const data = toRaw(this.values);
-
       if (this.isEditMode) {
-        //post a new status
-        console.log("send to status");
+        const patientLastStatus = toRaw(this.values);
+        const id = patientLastStatus.id;
+        delete patientLastStatus.id;
 
-        let data = await this.createPatientStatus({
-          ...this.values,
-          lastStatusId: null,
+        let newOutcomeStatus = await this.createPatientStatus({
+          ...patientLastStatus,
+          lastStatusId: id,
           patientId: this.patientId,
+          nextStatusId: null,
         });
 
-        let { data: statusList } = await getStatusByPatientId(this.patientId);
-
+        // const vv = statusList[statusList.length - 2]?.id;
         patchStatus(
           {
-            lastStatusId: statusList[statusList.length - 2]?.id || null,
-            nextStatusId: null,
+            nextStatusId: newOutcomeStatus.id,
           },
-          data.id
+          id
         );
 
-        if (statusList.length > 1) {
-          patchStatus(
-            {
-              nextStatusId: data.id,
-            },
-            statusList[statusList.length - 2]?.id || null
-          );
-          return;
-        }
-
-        return;
+        return this.f7router.navigate({ name: "OutcomeHome", params: { id: this.algorithmId } });
       }
 
-      const response = await createOutcomePatient({ ...data, formId: f7.store.state.algorithm.id });
+      const { data: newPatientForList } = await createOutcomePatient({
+        ...this.values,
+        formId: f7.store.state.algorithm.id,
+      });
+      const firstOutcomeResult = await this.createPatientStatus({
+        ...newPatientForList,
+        lastStatusId: null,
+        patientId: newPatientForList.id,
+        nextStatusId: null,
+      });
 
-      console.log(response);
+      console.log(newPatientForList);
+      console.log(firstOutcomeResult);
 
       //see how to redirect correctly
-      this.f7router.navigate("/algorithms/f2e38111-d571-4940-8ea7-1e3d677a0f02/outcomes");
+      return this.f7router.navigate({ name: "OutcomeHome", params: { id: this.algorithmId } });
     },
 
     showFieldPregnantField() {
-      return this.values["SEXO"] === "M" || this.values["SEXO"] === "" ? null : "GESTANTE";
+      return this.values?.["SEXO"] === "M" || this.values?.["SEXO"] === "" ? null : "GESTANTE";
     },
 
     parseAge(age) {
