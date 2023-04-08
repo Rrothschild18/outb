@@ -114,7 +114,7 @@ export default {
             }),
           ];
           this.loading = false;
-        }, 0);
+        }, 100);
       } catch (e) {
         console.log(e);
       } finally {
@@ -146,11 +146,6 @@ export default {
   overflow-y: scroll;
   max-height: 500px;
   height: 500px;
-
-  // .item-title: {
-  //   display: none !important;
-  // }
-
   .patient-list-item {
     height: 70px;
     width: 70px;

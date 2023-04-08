@@ -9,3 +9,4 @@ const api = axios.create({
 export default api;
 export * from "./patients";
 export * from "./outcomes";
+export * from "./algorithms";

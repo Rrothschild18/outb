@@ -10,6 +10,7 @@
         </div>
       </template>
     </f7-navbar>
+    <Loader absolute v-if="isLoading" />
     <f7-block class="mt-3">
       <div class="mb-10 mt-5">
         <h4>Algorithms</h4>
@@ -19,54 +20,26 @@
         </span>
       </div>
 
-      <f7-row>
-        <f7-col width="100" class="mb-3">
+      <f7-row v-if="!isLoading">
+        <f7-col width="100" class="mb-3" v-for="algorithm in algorithms" :key="algorithm.id">
           <f7-card class="m-0 border no-shadow" :padding="false">
             <template #content>
               <f7-button
+                :disabled="!algorithm.active"
                 class="py-6 px-4 algorithm-list-button"
-                @click="
-                  f7router.navigate({ name: 'OutcomeHome', params: { id: 'f2e38111-d571-4940-8ea7-1e3d677a0f02' } })
-                "
+                @click="redirectToSelectedAlgorithm(algorithm)"
               >
                 <div class="d-flex justify-content-between align-items-center w-100">
-                  <h4 class="fw-bold text-gray-dark mb-0">Outcomes</h4>
-                  <f7-icon material="chevron_right" class="status-icon"></f7-icon>
+                  <h4 class="fw-bold mb-0" :class="algorithmCardClasses(algorithm.active)">
+                    {{ algorithm.name }}
+                  </h4>
+                  <f7-icon
+                    material="chevron_right"
+                    class="status-icon"
+                    :class="algorithmIconClasses(algorithm.active)"
+                  ></f7-icon>
                 </div>
               </f7-button>
-            </template>
-          </f7-card>
-        </f7-col>
-
-        <f7-col width="100" class="mb-3">
-          <f7-card class="m-0 py-6 px-4 border no-shadow" :padding="false">
-            <template #content>
-              <div class="d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold text-gray mb-0">Tuberculosis with resistant bacteria</h4>
-                <f7-icon material="chevron_right" class="status-icon _disabled"></f7-icon>
-              </div>
-            </template>
-          </f7-card>
-        </f7-col>
-
-        <f7-col width="100" class="mb-3">
-          <f7-card class="m-0 py-6 px-4 border no-shadow" :padding="false">
-            <template #content>
-              <div class="d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold text-gray mb-0">Primary abandon</h4>
-                <f7-icon material="chevron_right" class="status-icon _disabled"></f7-icon>
-              </div>
-            </template>
-          </f7-card>
-        </f7-col>
-
-        <f7-col width="100" class="mb-3">
-          <f7-card class="m-0 py-6 px-4 border no-shadow" :padding="false">
-            <template #content>
-              <div class="d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold text-gray mb-0">Return from abandon</h4>
-                <f7-icon material="chevron_right" class="status-icon _disabled"></f7-icon>
-              </div>
             </template>
           </f7-card>
         </f7-col>
@@ -75,16 +48,59 @@
   </f7-page>
 </template>
 <script>
+import { f7 } from "framework7-vue";
+import { algorithmsList } from "../services";
+import { toRaw } from "vue";
+
 export default {
   props: {
     f7route: Object,
     f7router: Object,
   },
+
   data() {
-    return {};
+    return {
+      algorithms: [],
+      isLoading: true,
+    };
   },
 
-  methods: {},
+  mounted() {
+    this.getAlgorithms();
+  },
+
+  methods: {
+    setCurrentAlgorithm: (payload) => f7.store.dispatch("setCurrentSelectedAlgorithm", payload),
+
+    async getAlgorithms() {
+      try {
+        const { data } = await algorithmsList();
+
+        this.algorithms = [...data];
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    algorithmCardClasses(isActive) {
+      return isActive ? "text-gray-dark" : "text-gray";
+    },
+
+    algorithmIconClasses(isActive) {
+      return isActive ? "" : "_disabled";
+    },
+
+    redirectToSelectedAlgorithm(algorithm) {
+      const parsedAlgorithm = toRaw(algorithm);
+      this.setCurrentAlgorithm(parsedAlgorithm);
+
+      debugger;
+
+      return this.f7router.navigate({ name: "OutcomeHome", params: { id: parsedAlgorithm.id } });
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

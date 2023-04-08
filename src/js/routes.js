@@ -13,6 +13,7 @@ import PatientList from "../pages/patients/patientList.vue";
 
 import OutcomeHome from "../pages/algorithms/outcomes/outcomeHome.vue";
 import OutcomesList from "../pages/algorithms/outcomes/outcomesList.vue";
+import OutcomeForm from "../pages/algorithms/outcomes/outcomeForm.vue";
 
 var routes = [
   {
@@ -66,17 +67,22 @@ var routes = [
     path: "/algorithms/:id/",
     component: OutcomeHome,
     children: [
-      {
-        name: "OutcomesList",
-        path: "outcomes",
-        component: OutcomesList,
-      },
+      // {
+      //   name: "OutcomesList",
+      //   path: "outcomes",
+      //   component: OutcomesList,
+      // },
     ],
   },
   {
     name: "OutcomesList",
     path: "/algorithms/:id/outcomes",
     component: OutcomesList,
+  },
+  {
+    name: "OutcomeForm",
+    path: "/algorithms/:id/outcomes/create",
+    component: OutcomeForm,
   },
   {
     path: "(.*)",

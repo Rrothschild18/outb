@@ -1,10 +1,10 @@
 <template>
-  <f7-page name="PatientCreate" class="PatientCreate">
+  <f7-page name="OutcomeForm" class="OutcomeForm">
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
           <f7-icon material="arrow_back" class="back-arrow" size="30px" @click="f7router.back()"></f7-icon>
-          <h4 class="mb-0 fw-bold">Cadastrar paciente</h4>
+          <h4 class="mb-0 fw-bold">Register outcome</h4>
         </div>
       </template>
     </f7-navbar>
@@ -77,7 +77,7 @@
               </f7-col>
             </f7-row>
           </f7-tab>
-
+          <!-- STEP 2 -->
           <f7-tab id="tab-2">
             <f7-row>
               <h5>Dados médicos</h5>
@@ -124,6 +124,7 @@
             </f7-col>
           </f7-tab>
 
+          <!-- STEP 3 -->
           <f7-tab id="tab-3">
             <f7-row>
               <h5>Dados sobre a TB e comorbidades</h5>
@@ -194,14 +195,17 @@
   </f7-page>
 </template>
 <script>
+import { f7 } from "framework7-vue";
+
 import {
-  patientFields,
-  createPatient,
+  outcomesFields,
+  createOutcomePatient,
   patientById,
   newStatus,
   patchStatus,
   getStatusByPatientId,
-} from "../../services";
+} from "../../../services";
+
 import { toRaw } from "vue";
 
 export default {
@@ -420,10 +424,12 @@ export default {
   },
 
   mounted() {
-    this.getPatientFields();
+    console.log(f7.store.state.algorithm);
 
-    if (this.f7route.params.id) {
-      this.getPatientById(this.f7route.params.id);
+    this.getOutcomeFields();
+
+    if (this.f7route.params.patientId) {
+      this.getPatientById(this.f7route.params.patientId);
     }
   },
 
@@ -473,8 +479,8 @@ export default {
       this.stepperConfig.currentStep--;
     },
 
-    async getPatientFields() {
-      let { data } = await patientFields();
+    async getOutcomeFields() {
+      let { data } = await outcomesFields();
 
       this.fields = data.fields;
     },
@@ -551,9 +557,11 @@ export default {
         return;
       }
 
-      const response = await createPatient(data);
+      const response = await createOutcomePatient(data);
       console.log(response);
-      this.f7router.navigate("/login/");
+
+      //see how to redirect correctly
+      this.f7router.navigate("/algorithms/f2e38111-d571-4940-8ea7-1e3d677a0f02/outcomes");
     },
 
     showFieldPregnantField() {
@@ -616,12 +624,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.PatientCreate {
-  .back-arrow {
-    position: absolute;
-    left: 16px;
-  }
-
+.OutcomeForm {
   .form {
     .list .item-content {
       padding-left: 0;
