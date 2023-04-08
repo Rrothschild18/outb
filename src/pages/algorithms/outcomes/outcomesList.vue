@@ -29,7 +29,9 @@
               v-for="({ id, name, type, status }, index) of patients"
               :key="index"
               chevron-center
-              @click="f7router.navigate({ name: 'PatientStatus', params: { id } })"
+              @click="
+                f7router.navigate({ name: 'OutcomeStatus', params: { algorithmId: this.outcomeAlgorithmId, id } })
+              "
             >
               <template #default>
                 <section class="d-flex">
@@ -61,6 +63,7 @@
   </f7-page>
 </template>
 <script>
+import { f7 } from "framework7-vue";
 import { setColor } from "../../../helpers/colors";
 import { outcomesFields, outcomesList } from "../../../services";
 
@@ -81,6 +84,13 @@ export default {
   mounted() {
     this.getOutcomesFields();
     this.getOutcomesList();
+  },
+
+  computed: {
+    //must get it from getters not directly, refactor later
+    outcomeAlgorithmId() {
+      return f7.store.state.algorithm.id;
+    },
   },
 
   methods: {

@@ -94,9 +94,8 @@ export default {
 
     redirectToSelectedAlgorithm(algorithm) {
       const parsedAlgorithm = toRaw(algorithm);
-      this.setCurrentAlgorithm(parsedAlgorithm);
 
-      debugger;
+      this.setCurrentAlgorithm(parsedAlgorithm);
 
       return this.f7router.navigate({ name: "OutcomeHome", params: { id: parsedAlgorithm.id } });
     },

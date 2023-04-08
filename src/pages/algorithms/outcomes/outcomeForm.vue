@@ -200,7 +200,8 @@ import { f7 } from "framework7-vue";
 import {
   outcomesFields,
   createOutcomePatient,
-  patientById,
+  outcomePatientById,
+  lastOutcomeStatusByPatientId,
   newStatus,
   patchStatus,
   getStatusByPatientId,
@@ -424,12 +425,13 @@ export default {
   },
 
   mounted() {
-    console.log(f7.store.state.algorithm);
+    console.log(f7.store.state.algorithm.id);
+    console.log(toRaw(this.f7route.params));
 
     this.getOutcomeFields();
 
-    if (this.f7route.params.patientId) {
-      this.getPatientById(this.f7route.params.patientId);
+    if (this.f7route.params.id) {
+      this.getLastOutcomeStatusByPatientId(this.f7route.params.id);
     }
   },
 
@@ -485,8 +487,8 @@ export default {
       this.fields = data.fields;
     },
 
-    async getPatientById(id) {
-      let { data } = await patientById(id);
+    async getLastOutcomeStatusByPatientId(patientId) {
+      let { data } = await lastOutcomeStatusByPatientId(patientId);
 
       delete data.id;
 
@@ -557,7 +559,8 @@ export default {
         return;
       }
 
-      const response = await createOutcomePatient(data);
+      const response = await createOutcomePatient({ ...data, formId: f7.store.state.algorithm.id });
+
       console.log(response);
 
       //see how to redirect correctly

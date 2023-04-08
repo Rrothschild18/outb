@@ -14,6 +14,7 @@ import PatientList from "../pages/patients/patientList.vue";
 import OutcomeHome from "../pages/algorithms/outcomes/outcomeHome.vue";
 import OutcomesList from "../pages/algorithms/outcomes/outcomesList.vue";
 import OutcomeForm from "../pages/algorithms/outcomes/outcomeForm.vue";
+import OutcomeStatus from "../pages/algorithms/outcomes/outcomeStatus.vue";
 
 var routes = [
   {
@@ -82,6 +83,16 @@ var routes = [
   {
     name: "OutcomeForm",
     path: "/algorithms/:id/outcomes/create",
+    component: OutcomeForm,
+  },
+  {
+    name: "OutcomeStatus",
+    path: "/algorithms/:algorithmId/outcomes/:id/status",
+    component: OutcomeStatus,
+  },
+  {
+    name: "OutcomeFormEdit",
+    path: "/algorithms/:algorithmId/outcomes/:id/edit",
     component: OutcomeForm,
   },
   {

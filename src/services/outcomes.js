@@ -36,3 +36,40 @@ export const createOutcomePatient = (data) => {
     method: "POST",
   });
 };
+
+export const outcomePatientById = (id) => {
+  return api({
+    url: `outcomesPatients/${id}`,
+    method: "GET",
+  });
+};
+
+export const outcomeStatusByPatientId = (id) => {
+  console.log({ id });
+
+  return api({
+    url: `status`,
+    method: "GET",
+    params: {
+      patientId: id,
+    },
+  });
+};
+
+export const lastOutcomeStatusByPatientId = async (id) => {
+  console.log({ id });
+
+  const response = await api({
+    url: `status`,
+    method: "GET",
+    params: {
+      patientId: id,
+    },
+  });
+
+  const lastStatues = response.data.find((outcomeStatus) => !outcomeStatus.nextStatusId);
+
+  const newResponse = { ...response, data: lastStatues };
+
+  return newResponse;
+};
