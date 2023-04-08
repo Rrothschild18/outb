@@ -617,11 +617,6 @@ export default {
 </script>
 <style lang="scss">
 .PatientCreate {
-  .back-arrow {
-    position: absolute;
-    left: 16px;
-  }
-
   .form {
     .list .item-content {
       padding-left: 0;

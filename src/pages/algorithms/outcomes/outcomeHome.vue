@@ -64,7 +64,13 @@
               </f7-col>
 
               <f7-col width="50" class="mb-3">
-                <f7-card class="m-0 border" no-shadow @click="f7router.navigate({ name: 'PatientList' })">
+                <f7-card
+                  class="m-0 border"
+                  no-shadow
+                  @click="
+                    f7router.navigate({ name: 'OutcomesList', params: { id: 'f2e38111-d571-4940-8ea7-1e3d677a0f02' } })
+                  "
+                >
                   <template #content>
                     <div class="menu-content">
                       <div

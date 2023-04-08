@@ -21,7 +21,7 @@
             </h5>
           </section>
 
-          <section>
+          <!-- <section>
             <div class="d-flex justify-content-between mb-5">
               <span>Recente</span>
               <span>13/12/ 2021</span>
@@ -43,7 +43,7 @@
                 </f7-button>
               </template>
             </f7-card>
-          </section>
+          </section> -->
 
           <section class="mt-3">
             <f7-row>
