@@ -198,11 +198,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.back-arrow {
-  position: absolute;
-  left: 16px;
-}
-
 .status-card {
   position: absolute;
   left: 0;

@@ -3,7 +3,8 @@
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
-          <h4 class="mb-0 fw-bold">Home</h4>
+          <h4 class="mb-0 fw-bold">Outcomes</h4>
+          <f7-icon material="arrow_back" class="back-arrow ripple" size="30px" @click="f7router.back()"></f7-icon>
         </div>
       </template>
     </f7-navbar>
@@ -13,7 +14,7 @@
       <f7-row>
         <f7-col>
           <section class="mb-8">
-            <h4 class="text-primary fw-bold d-block mb-0">Outcomes</h4>
+            <h4 class="text-primary fw-bold d-block mb-0">Outcomes algorithm</h4>
             <h5 class="mb-0">
               offers insights using machine learning algorithms to combat tuberculosis. It provides an overview what are
               possibles outcomes for patients who has TB between: option 1, option 2, option 3.
@@ -77,22 +78,7 @@
                 </f7-card>
               </f7-col>
 
-              <f7-col width="50" class="mb-3">
-                <f7-card class="m-0 border" no-shadow @click="f7router.navigate({ name: 'AlgorithmsList' })">
-                  <template #content>
-                    <div class="menu-content">
-                      <div
-                        class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
-                      >
-                        <f7-icon material="health_and_safety" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Listar predições</h6>
-                      </div>
-                    </div>
-                  </template>
-                </f7-card>
-              </f7-col>
-
-              <f7-col width="50" class="mb-3">
+              <f7-col width="100" class="mb-3">
                 <f7-card class="m-0 border" no-shadow>
                   <template #content>
                     <div class="menu-content">

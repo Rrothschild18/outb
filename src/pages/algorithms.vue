@@ -115,10 +115,6 @@ export default {
     padding: 0 !important;
   }
 }
-.back-arrow {
-  position: absolute;
-  left: 16px;
-}
 .algorithm-list-button {
   height: 80px;
   display: flex;
