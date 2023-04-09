@@ -13,8 +13,9 @@
       <f7-row>
         <f7-col>
           <section class="mb-8">
-            <h4 class="text-primary fw-bold d-block mb-0">OUTb</h4>
+            <h4 class="text-primary fw-bold d-block mb-0">OuTB</h4>
             <h5 class="mb-0">
+              <!-- <span class="text-primary fw-bold mb-0 fs-4 me-1">OuTB </span> -->
               offers insights using machine learning algorithms to combat tuberculosis. It provides an overview of the
               different algorithms available and how they can support healthcare professionals in improving diagnoses
               and manage TB more effectively.

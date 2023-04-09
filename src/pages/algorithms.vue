@@ -13,11 +13,13 @@
     <Loader absolute v-if="isLoading" />
     <f7-block class="mt-3">
       <div class="mb-10 mt-5">
-        <h4>Algorithms</h4>
-        <span>
-          Discover our machine learning algorithms designed to aid patients with tuberculosis. Explore our list of
-          algorithms and how they can help diagnose and mana ge TB more effectively.
-        </span>
+        <!-- <h4 class="text-primary fw-bold mb-0">Discover</h4> -->
+        <h5>
+          <span class="text-primary fw-bold mb-0 fs-4 me-0">Discover</span>
+
+          our machine learning algorithms designed to aid patients with tuberculosis. Explore our list of algorithms and
+          how they can help diagnose and mana ge TB more effectively.
+        </h5>
       </div>
 
       <f7-row v-if="!isLoading">
@@ -30,7 +32,10 @@
                 @click="redirectToSelectedAlgorithm(algorithm)"
               >
                 <div class="d-flex justify-content-between align-items-center w-100">
-                  <h4 class="fw-bold mb-0" :class="algorithmCardClasses(algorithm.active)">
+                  <h4
+                    class="fw-bold mb-0 text-gray text-wrap text-align-left"
+                    :class="algorithmCardClasses(algorithm.active)"
+                  >
                     {{ algorithm.name }}
                   </h4>
                   <f7-icon

@@ -8,7 +8,7 @@
             <svg width="84" height="92">
               <image class="logo" xlink:href="/assets/LoginLogo.svg" />
             </svg>
-            <h1 class="fw-bold text-primary ms-4 mb-0">OUTb</h1>
+            <h1 class="fw-bold text-primary ms-4 mb-0">OuTB</h1>
           </div>
 
           <form action="" class="w-100 Form">

@@ -1,9 +1,7 @@
 {
   "cwd": "/home/raul/Desktop/Projects",
-  "type": [
-    "web"
-  ],
-  "name": "Outb",
+  "type": ["web"],
+  "name": "OuTB",
   "framework": "vue",
   "template": "single-view",
   "cssPreProcessor": "scss",

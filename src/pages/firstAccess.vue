@@ -7,7 +7,7 @@
             <svg width="123" height="135">
               <image class="logo" xlink:href="/assets/Logo.svg" />
             </svg>
-            <h1 class="fw-bold text-primary mb-0">OUTb</h1>
+            <h1 class="fw-bold text-primary mb-0">OuTB</h1>
 
             <div class="d-flex actions">
               <f7-button outline class="Button me-5">

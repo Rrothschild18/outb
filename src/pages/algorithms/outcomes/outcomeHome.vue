@@ -14,10 +14,11 @@
       <f7-row>
         <f7-col>
           <section class="mb-8">
-            <h4 class="text-primary fw-bold d-block mb-0">Outcomes algorithm</h4>
+            <!-- <h4 class="text-primary fw-bold d-block mb-0">Outcomes algorithm</h4> -->
             <h5 class="mb-0">
-              offers insights using machine learning algorithms to combat tuberculosis. It provides an overview what are
-              possibles outcomes for patients who has TB between: option 1, option 2, option 3.
+              <span class="text-primary fw-bold mb-0 fs-4 me-1">Outcomes algorithm</span>
+
+              provides an overview of what are possibles outcomes for patients who has TB
             </h5>
           </section>
 
@@ -35,11 +36,11 @@
               <template #content>
                 <f7-button class="status-button">
                   <div class="d-flex justify-content-between w-100 mb-3">
-                    <h6 class="text-secondary-blue mb-0">Retorno abandono</h6>
+                    <h6 class="text-secondary-blue mb-0">Return from abandon</h6>
                     <f7-icon material="chevron_right" class="status-icon"></f7-icon>
                   </div>
-                  <h4 class="fw-bold mb-0">Paciente 18062022</h4>
-                  <span class="text-gray-dark">Tratamento ambulatorial</span>
+                  <h4 class="fw-bold mb-0">Patient D#18062022</h4>
+                  <span class="text-gray-dark">In outpatient treatment</span>
                 </f7-button>
               </template>
             </f7-card>
@@ -65,7 +66,7 @@
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
                         <f7-icon material="person_add" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Cadastrar paciente</h6>
+                        <h6 class="d-block mb-0 mt-2">Create patient outcome</h6>
                       </div>
                     </div>
                   </template>
@@ -86,7 +87,7 @@
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
                         <f7-icon material="recent_actors" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Listar paciente</h6>
+                        <h6 class="d-block mb-0 mt-2">Patients outcomes</h6>
                       </div>
                     </div>
                   </template>
@@ -101,7 +102,7 @@
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
                         <f7-icon material="help" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Ajuda</h6>
+                        <h6 class="d-block mb-0 mt-2">Help</h6>
                       </div>
                     </div>
                   </template>

@@ -538,7 +538,6 @@ export default {
           nextStatusId: null,
         });
 
-        // const vv = statusList[statusList.length - 2]?.id;
         patchStatus(
           {
             nextStatusId: newOutcomeStatus.id,
@@ -553,6 +552,7 @@ export default {
         ...this.values,
         formId: f7.store.state.algorithm.id,
       });
+
       const firstOutcomeResult = await this.createPatientStatus({
         ...newPatientForList,
         lastStatusId: null,
