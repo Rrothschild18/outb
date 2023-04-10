@@ -202,7 +202,9 @@ export default {
       return { backgroundColor: `${this.setColor(this.generateRandomStatus())}` };
     },
 
-    formateStatusDate(date) {
+    formateStatusDate(date = new Date()) {
+      if (!date) return "-";
+
       const dateObj = new Date(date);
 
       const options = { day: "numeric", year: "numeric", month: "long" };
