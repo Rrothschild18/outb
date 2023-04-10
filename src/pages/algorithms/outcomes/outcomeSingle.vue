@@ -10,13 +10,7 @@
     </f7-navbar>
     <f7-block class="mt-3">
       <section>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="mb-0">Dados paciente</h4>
-          <f7-button fill @click="f7router.navigate('/algorithms/')" class="button button-tonal">
-            <span class="text-capitalize">Novo</span>
-            <f7-icon material="superscript" size="30px" class="m-0" color="white">Associar</f7-icon>
-          </f7-button>
-        </div>
+        <h4>Dados paciente</h4>
 
         <Box>
           <f7-row>

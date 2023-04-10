@@ -7,15 +7,15 @@
             <svg width="123" height="135">
               <image class="logo" xlink:href="/assets/Logo.svg" />
             </svg>
-            <h1 class="fw-bold text-primary mb-0">OUTb</h1>
+            <h1 class="fw-bold text-primary mb-0">OuTB</h1>
 
             <div class="d-flex actions">
               <f7-button outline class="Button me-5">
-                <span>Solicitar acesso</span>
+                <span>Request access</span>
               </f7-button>
 
               <f7-button fill class="Button" @click="f7router.navigate('/login/')">
-                <span>Entrar</span>
+                <span>Sign in</span>
               </f7-button>
             </div>
           </div>

@@ -1,10 +1,10 @@
 <template>
-  <f7-page name="PatientCreate" class="PatientCreate">
+  <f7-page name="OutcomeForm" class="OutcomeForm">
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
           <f7-icon material="arrow_back" class="back-arrow" size="30px" @click="f7router.back()"></f7-icon>
-          <h4 class="mb-0 fw-bold">Cadastrar paciente</h4>
+          <h4 class="mb-0 fw-bold">Register outcome</h4>
         </div>
       </template>
     </f7-navbar>
@@ -77,7 +77,7 @@
               </f7-col>
             </f7-row>
           </f7-tab>
-
+          <!-- STEP 2 -->
           <f7-tab id="tab-2">
             <f7-row>
               <h5>Dados médicos</h5>
@@ -124,6 +124,7 @@
             </f7-col>
           </f7-tab>
 
+          <!-- STEP 3 -->
           <f7-tab id="tab-3">
             <f7-row>
               <h5>Dados sobre a TB e comorbidades</h5>
@@ -194,14 +195,18 @@
   </f7-page>
 </template>
 <script>
+import { f7 } from "framework7-vue";
+
 import {
-  patientFields,
-  createPatient,
-  patientById,
+  outcomesFields,
+  createOutcomePatient,
+  outcomePatientById,
+  lastOutcomeStatusByPatientId,
   newStatus,
   patchStatus,
   getStatusByPatientId,
-} from "../../services";
+} from "../../../services";
+
 import { toRaw } from "vue";
 
 export default {
@@ -247,6 +252,10 @@ export default {
   },
 
   computed: {
+    algorithmId() {
+      return f7.store.state.algorithm.id;
+    },
+
     hasFields() {
       return !!Object.keys(this.fields).length;
     },
@@ -420,10 +429,13 @@ export default {
   },
 
   mounted() {
-    this.getPatientFields();
+    console.log(f7.store.state.algorithm.id);
+    console.log(toRaw(this.f7route.params));
+
+    this.getOutcomeFields();
 
     if (this.f7route.params.id) {
-      this.getPatientById(this.f7route.params.id);
+      this.getLastOutcomeStatusByPatientId(this.f7route.params.id);
     }
   },
 
@@ -473,16 +485,14 @@ export default {
       this.stepperConfig.currentStep--;
     },
 
-    async getPatientFields() {
-      let { data } = await patientFields();
+    async getOutcomeFields() {
+      let { data } = await outcomesFields();
 
       this.fields = data.fields;
     },
 
-    async getPatientById(id) {
-      let { data } = await patientById(id);
-
-      delete data.id;
+    async getLastOutcomeStatusByPatientId(patientId) {
+      let { data } = await lastOutcomeStatusByPatientId(patientId);
 
       this.values = data;
     },
@@ -516,48 +526,55 @@ export default {
     },
 
     async onSubmissionForm() {
-      const data = toRaw(this.values);
-
       if (this.isEditMode) {
-        //post a new status
-        console.log("send to status");
+        const patientLastStatus = toRaw(this.values);
+        const id = patientLastStatus.id;
+        delete patientLastStatus.id;
 
-        let data = await this.createPatientStatus({
-          ...this.values,
-          lastStatusId: null,
+        let newOutcomeStatus = await this.createPatientStatus({
+          ...patientLastStatus,
+          lastStatusId: id,
           patientId: this.patientId,
+          nextStatusId: null,
+          algorithmId: this.algorithmId,
+          createdAt: this.dateSaoPaulo(),
         });
-
-        let { data: statusList } = await getStatusByPatientId(this.patientId);
 
         patchStatus(
           {
-            lastStatusId: statusList[statusList.length - 2]?.id || null,
-            nextStatusId: null,
+            nextStatusId: newOutcomeStatus.id,
           },
-          data.id
+          id
         );
 
-        if (statusList.length > 1) {
-          patchStatus(
-            {
-              nextStatusId: data.id,
-            },
-            statusList[statusList.length - 2]?.id || null
-          );
-          return;
-        }
-
-        return;
+        return this.f7router.navigate({ name: "OutcomeHome", params: { id: this.algorithmId } });
       }
 
-      const response = await createPatient(data);
-      console.log(response);
-      this.f7router.navigate("/login/");
+      const { data: newPatientForList } = await createOutcomePatient({
+        ...this.values,
+        formId: f7.store.state.algorithm.id,
+        algorithmId: this.algorithmId,
+        createdAt: this.dateSaoPaulo(),
+      });
+
+      const firstOutcomeResult = await this.createPatientStatus({
+        ...newPatientForList,
+        lastStatusId: null,
+        patientId: newPatientForList.id,
+        nextStatusId: null,
+        algorithmId: this.algorithmId,
+        createdAt: this.dateSaoPaulo(),
+      });
+
+      console.log(newPatientForList);
+      console.log(firstOutcomeResult);
+
+      //see how to redirect correctly
+      return this.f7router.navigate({ name: "OutcomeHome", params: { id: this.algorithmId } });
     },
 
     showFieldPregnantField() {
-      return this.values["SEXO"] === "M" || this.values["SEXO"] === "" ? null : "GESTANTE";
+      return this.values?.["SEXO"] === "M" || this.values?.["SEXO"] === "" ? null : "GESTANTE";
     },
 
     parseAge(age) {
@@ -612,11 +629,31 @@ export default {
 
       return !!this.values[fieldNameToCompare]?.length ? fieldToShow : null;
     },
+
+    dateSaoPaulo() {
+      // get the current date and time
+      const now = new Date();
+
+      // convert to Sao Paulo time zone
+      const options = {
+        timeZone: "America/Sao_Paulo",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      };
+
+      const saoPauloDate = now.toLocaleString("en-US", options);
+
+      return saoPauloDate.replace(",", " ");
+    },
   },
 };
 </script>
 <style lang="scss">
-.PatientCreate {
+.OutcomeForm {
   .form {
     .list .item-content {
       padding-left: 0;

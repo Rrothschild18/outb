@@ -1,10 +1,10 @@
 <template>
-  <f7-page name="PatientStatus">
+  <f7-page name="OutcomeStatus">
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
           <f7-icon material="arrow_back" class="back-arrow ripple" size="30px" @click="f7router.back()"></f7-icon>
-          <h4 class="mb-0 fw-bold">Paciente 18062022</h4>
+          <h4 class="mb-0 fw-bold">Outcome patient</h4>
         </div>
       </template>
     </f7-navbar>
@@ -72,7 +72,8 @@
           >
             <div class="circle" :style="statusColor2(generateRandomStatus())"></div>
             <!-- <div class="circle back-green" :style="statusColor(generateRandomStatus())"></div> -->
-            <h6 class="text-gray-dark">28 FEVEREIRO, 2020</h6>
+            <!-- <h6 class="text-gray-dark">{{ status.createdAt }}</h6> -->
+            <h6 class="text-gray-dark">{{ formateStatusDate(status.createdAt) }}</h6>
             <h5>{{ parseSelectResultsStatuses("SITUACAO_ATUAL") }}</h5>
             <span class="text-gray-dark text-start"
               >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
@@ -90,8 +91,8 @@
       color="primary"
       @click="
         f7router.navigate({
-          name: 'PatientEdit',
-          params: { id: patientId },
+          name: 'OutcomeFormEdit',
+          params: { algorithmId, id: patientId, mode: 'edit' },
         })
       "
     >
@@ -100,8 +101,9 @@
   </f7-page>
 </template>
 <script>
-import { setColor, setColorName } from "../../helpers/colors";
-import { getStatusByPatientId, patientFields } from "../../services";
+import { toRaw } from "vue";
+import { setColor, setColorName } from "../../../helpers/colors";
+import { outcomeStatusByPatientId, outcomesFields } from "../../../services";
 export default {
   props: {
     f7route: Object,
@@ -112,11 +114,16 @@ export default {
     patientId() {
       return this.f7route.params.id;
     },
+
+    algorithmId() {
+      return this.f7route.params.algorithmId;
+    },
   },
 
-  created() {
+  async created() {
+    const v = toRaw(this.f7route.params);
     //resolve promossies race conditions
-    this.loadData();
+    await this.loadData();
   },
 
   data() {
@@ -133,22 +140,22 @@ export default {
     setColor,
 
     async loadData() {
-      await this.getPatientFields();
+      await this.getOutcomeFields();
       await this.fetchPatientStatuses();
     },
 
     async fetchPatientStatuses() {
       try {
-        let { data: statusList } = await getStatusByPatientId(this.patientId);
-        this.statuses = statusList;
-        this.lastStatus = statusList[statusList.length - 1] || {};
+        let { data: statusList } = await outcomeStatusByPatientId(this.patientId);
+        this.statuses = statusList.reverse();
+        this.lastStatus = statusList.find((outcomeStatus) => !outcomeStatus.nextStatusId);
       } catch (e) {
         console.log(e);
       }
     },
 
-    async getPatientFields() {
-      let { data } = await patientFields();
+    async getOutcomeFields() {
+      let { data } = await outcomesFields();
 
       this.fields = data.fields;
     },
@@ -193,6 +200,17 @@ export default {
 
     statusColor2() {
       return { backgroundColor: `${this.setColor(this.generateRandomStatus())}` };
+    },
+
+    formateStatusDate(date) {
+      const dateObj = new Date(date);
+
+      const options = { day: "numeric", year: "numeric", month: "long" };
+      const formattedDate = dateObj.toLocaleDateString("pt-BR", options);
+
+      const [day, _, month, __, year] = formattedDate.split(" ");
+
+      return `${day} ${month.toLocaleUpperCase("pt-BR")}, ${year} `;
     },
   },
 };

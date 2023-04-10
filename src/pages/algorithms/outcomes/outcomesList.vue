@@ -1,37 +1,36 @@
 <template>
-  <f7-page name="PatientList">
+  <f7-page name="OutcomesList">
     <f7-navbar no-shadow class="shadow-sm">
       <template #default>
         <div class="w-100 bg-white h-100 d-flex align-items-center justify-content-center">
           <f7-icon material="arrow_back" class="back-arrow ripple" size="30px" @click="f7router.back()"></f7-icon>
-          <h4 class="mb-0 fw-bold">Pacientes</h4>
+          <h4 class="mb-0 fw-bold">Outcomes patients</h4>
         </div>
       </template>
     </f7-navbar>
     <f7-block class="mt-3">
-      <h4>Listagem de pacientes</h4>
+      <h4>Outcomes list</h4>
       <section class="rounded bg-white shadow-sm pt-3">
         <f7-searchbar
           disable-button-text="Cancel"
           class="shadow-none border-bottom"
           placeholder="Pesquisar"
+          search-container=".search-list"
+          search-in=".search-by-patient-name"
+          :backdrop="false"
           :clear-button="true"
           :form="false"
         ></f7-searchbar>
 
         <Loader absolute v-if="loading" />
-        <f7-list media-list class="PatientList no-hairline mb-3" virtual-list no-hairlines>
+        <f7-list class="OutcomesList no-hairline mb-3 search-list searchbar-found" media-list no-hairlines>
           <f7-list-item v-if="!loading">
             <f7-list-item
-              link="#"
-              chevron-center
               v-for="({ id, name, type, status }, index) of patients"
               :key="index"
+              chevron-center
               @click="
-                f7router.navigate({
-                  name: 'PatientSingle',
-                  params: { id },
-                })
+                f7router.navigate({ name: 'OutcomeStatus', params: { algorithmId: this.outcomeAlgorithmId, id } })
               "
             >
               <template #default>
@@ -48,7 +47,7 @@
                   </div>
 
                   <div class="d-flex flex-column ms-5 h-70 justify-content-center">
-                    <h4 class="mb-0">{{ name }}</h4>
+                    <h4 class="mb-0 search-by-patient-name">{{ name }}</h4>
                     <h6 class="mb-0 text-gray-dark">{{ type }}</h6>
                   </div>
                 </section>
@@ -56,13 +55,17 @@
             </f7-list-item>
           </f7-list-item>
         </f7-list>
+        <f7-list strong-ios outline-ios dividers-ios class="searchbar-not-found">
+          <f7-list-item title="Nothing found" />
+        </f7-list>
       </section>
     </f7-block>
   </f7-page>
 </template>
 <script>
-import { setColor } from "../../helpers/colors";
-import { patientsList, patientFields } from "../../services";
+import { f7 } from "framework7-vue";
+import { setColor } from "../../../helpers/colors";
+import { outcomesFields, outcomesList } from "../../../services";
 
 export default {
   props: {
@@ -79,8 +82,15 @@ export default {
   },
 
   mounted() {
-    this.getPatientFields();
-    this.getPatientList();
+    this.getOutcomesFields();
+    this.getOutcomesList();
+  },
+
+  computed: {
+    //must get it from getters not directly, refactor later
+    outcomeAlgorithmId() {
+      return f7.store.state.algorithm.id;
+    },
   },
 
   methods: {
@@ -98,9 +108,9 @@ export default {
       return possibleStatuses[rNumber];
     },
 
-    async getPatientList() {
+    async getOutcomesList() {
       try {
-        let { data } = await patientsList();
+        let { data } = await outcomesList();
 
         setTimeout(() => {
           this.patients = [
@@ -114,15 +124,15 @@ export default {
             }),
           ];
           this.loading = false;
-        }, 0);
+        }, 100);
       } catch (e) {
         console.log(e);
       } finally {
       }
     },
 
-    async getPatientFields() {
-      let { data } = await patientFields();
+    async getOutcomesFields() {
+      let { data } = await outcomesFields();
       this.fields = data.fields;
     },
   },
@@ -142,11 +152,10 @@ export default {
   }
 }
 
-.PatientList {
+.OutcomesList {
   overflow-y: scroll;
   max-height: 500px;
   height: 500px;
-
   .patient-list-item {
     height: 70px;
     width: 70px;

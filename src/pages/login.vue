@@ -8,7 +8,7 @@
             <svg width="84" height="92">
               <image class="logo" xlink:href="/assets/LoginLogo.svg" />
             </svg>
-            <h1 class="fw-bold text-primary ms-4 mb-0">OUTb</h1>
+            <h1 class="fw-bold text-primary ms-4 mb-0">OuTB</h1>
           </div>
 
           <form action="" class="w-100 Form">
@@ -20,13 +20,14 @@
               </f7-col>
               <f7-col width="100 ">
                 <f7-list no-hairlines class="m-0">
-                  <f7-input label="Senha" class="mt-6" type="password" placeholder="Senha" clear-button> </f7-input>
+                  <f7-input label="Password" class="mt-6" type="password" placeholder="Password" clear-button>
+                  </f7-input>
                 </f7-list>
               </f7-col>
 
               <f7-col width="100 ">
                 <div class="d-flex justify-content-end mt-4">
-                  <span class="text-primary">Esqueceu a senha?</span>
+                  <span class="text-primary">Forgot password?</span>
                 </div>
               </f7-col>
             </f7-row>
@@ -34,10 +35,10 @@
 
           <div class="d-flex flex-column actions w-100">
             <f7-button fill @click="f7router.navigate('/home/')" class="Button w-100">
-              <span>Entrar</span>
+              <span>Log in</span>
             </f7-button>
             <f7-button class="Button w-100">
-              <span>Solicitar acesso</span>
+              <span>Request access</span>
             </f7-button>
           </div>
         </div>

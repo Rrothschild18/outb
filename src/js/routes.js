@@ -2,6 +2,7 @@ import SplashPage from "../pages/splash.vue";
 import HomePage from "../pages/home.vue";
 import NotFoundPage from "../pages/404.vue";
 import FirstAccess from "../pages/firstAccess.vue";
+import Algorithms from "../pages/algorithms.vue";
 import Login from "../pages/login.vue";
 
 //Patient
@@ -9,6 +10,11 @@ import PatientStatus from "../pages/patients/patientStatus.vue";
 import PatientCreate from "../pages/patients/patientCreate.vue";
 import PatientSingle from "../pages/patients/patientSingle.vue";
 import PatientList from "../pages/patients/patientList.vue";
+
+import OutcomeHome from "../pages/algorithms/outcomes/outcomeHome.vue";
+import OutcomesList from "../pages/algorithms/outcomes/outcomesList.vue";
+import OutcomeForm from "../pages/algorithms/outcomes/outcomeForm.vue";
+import OutcomeStatus from "../pages/algorithms/outcomes/outcomeStatus.vue";
 
 var routes = [
   {
@@ -51,6 +57,43 @@ var routes = [
     name: "PatientList",
     path: "/patients/",
     component: PatientList,
+  },
+  {
+    name: "AlgorithmsList",
+    path: "/algorithms/",
+    component: Algorithms,
+  },
+  {
+    name: "OutcomeHome",
+    path: "/algorithms/:id/",
+    component: OutcomeHome,
+    children: [
+      // {
+      //   name: "OutcomesList",
+      //   path: "outcomes",
+      //   component: OutcomesList,
+      // },
+    ],
+  },
+  {
+    name: "OutcomesList",
+    path: "/algorithms/:id/outcomes",
+    component: OutcomesList,
+  },
+  {
+    name: "OutcomeForm",
+    path: "/algorithms/:algorithmId/outcomes/create",
+    component: OutcomeForm,
+  },
+  {
+    name: "OutcomeStatus",
+    path: "/algorithms/:algorithmId/outcomes/:id/status",
+    component: OutcomeStatus,
+  },
+  {
+    name: "OutcomeFormEdit",
+    path: "/algorithms/:algorithmId/outcomes/:id/edit",
+    component: OutcomeForm,
   },
   {
     path: "(.*)",
