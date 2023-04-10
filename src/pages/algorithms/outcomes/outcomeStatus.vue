@@ -202,10 +202,8 @@ export default {
       return { backgroundColor: `${this.setColor(this.generateRandomStatus())}` };
     },
 
-    formateStatusDate() {
-      // create a Date object from the string '04/09/2023 21:51'
-      const dateStr = "04/09/2023 21:51";
-      const dateObj = new Date(dateStr);
+    formateStatusDate(date) {
+      const dateObj = new Date(date);
 
       const options = { day: "numeric", year: "numeric", month: "long" };
       const formattedDate = dateObj.toLocaleDateString("pt-BR", options);
