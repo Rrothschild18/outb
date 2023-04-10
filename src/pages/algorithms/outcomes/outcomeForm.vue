@@ -536,6 +536,8 @@ export default {
           lastStatusId: id,
           patientId: this.patientId,
           nextStatusId: null,
+          algorithmId: this.algorithmId,
+          createdAt: this.dateSaoPaulo(),
         });
 
         patchStatus(
@@ -551,6 +553,8 @@ export default {
       const { data: newPatientForList } = await createOutcomePatient({
         ...this.values,
         formId: f7.store.state.algorithm.id,
+        algorithmId: this.algorithmId,
+        createdAt: this.dateSaoPaulo(),
       });
 
       const firstOutcomeResult = await this.createPatientStatus({
@@ -558,6 +562,8 @@ export default {
         lastStatusId: null,
         patientId: newPatientForList.id,
         nextStatusId: null,
+        algorithmId: this.algorithmId,
+        createdAt: this.dateSaoPaulo(),
       });
 
       console.log(newPatientForList);
@@ -622,6 +628,26 @@ export default {
       }
 
       return !!this.values[fieldNameToCompare]?.length ? fieldToShow : null;
+    },
+
+    dateSaoPaulo() {
+      // get the current date and time
+      const now = new Date();
+
+      // convert to Sao Paulo time zone
+      const options = {
+        timeZone: "America/Sao_Paulo",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      };
+
+      const saoPauloDate = now.toLocaleString("en-US", options);
+
+      return saoPauloDate.replace(",", " ");
     },
   },
 };

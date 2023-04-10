@@ -72,7 +72,8 @@
           >
             <div class="circle" :style="statusColor2(generateRandomStatus())"></div>
             <!-- <div class="circle back-green" :style="statusColor(generateRandomStatus())"></div> -->
-            <h6 class="text-gray-dark">28 FEVEREIRO, 2020</h6>
+            <!-- <h6 class="text-gray-dark">{{ status.createdAt }}</h6> -->
+            <h6 class="text-gray-dark">{{ formateStatusDate(status.createdAt) }}</h6>
             <h5>{{ parseSelectResultsStatuses("SITUACAO_ATUAL") }}</h5>
             <span class="text-gray-dark text-start"
               >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
@@ -119,10 +120,10 @@ export default {
     },
   },
 
-  created() {
+  async created() {
     const v = toRaw(this.f7route.params);
     //resolve promossies race conditions
-    this.loadData();
+    await this.loadData();
   },
 
   data() {
@@ -146,7 +147,7 @@ export default {
     async fetchPatientStatuses() {
       try {
         let { data: statusList } = await outcomeStatusByPatientId(this.patientId);
-        this.statuses = statusList;
+        this.statuses = statusList.reverse();
         this.lastStatus = statusList.find((outcomeStatus) => !outcomeStatus.nextStatusId);
       } catch (e) {
         console.log(e);
@@ -199,6 +200,19 @@ export default {
 
     statusColor2() {
       return { backgroundColor: `${this.setColor(this.generateRandomStatus())}` };
+    },
+
+    formateStatusDate() {
+      // create a Date object from the string '04/09/2023 21:51'
+      const dateStr = "04/09/2023 21:51";
+      const dateObj = new Date(dateStr);
+
+      const options = { day: "numeric", year: "numeric", month: "long" };
+      const formattedDate = dateObj.toLocaleDateString("pt-BR", options);
+
+      const [day, _, month, __, year] = formattedDate.split(" ");
+
+      return `${day} ${month.toLocaleUpperCase("pt-BR")}, ${year} `;
     },
   },
 };

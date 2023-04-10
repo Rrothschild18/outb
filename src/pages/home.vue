@@ -57,7 +57,7 @@
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
                         <f7-icon material="person_add" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Cadastrar paciente</h6>
+                        <h6 class="d-block mb-0 mt-2">Register patient</h6>
                       </div>
                     </div>
                   </template>
@@ -72,7 +72,7 @@
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
                         <f7-icon material="recent_actors" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Listar paciente</h6>
+                        <h6 class="d-block mb-0 mt-2">Listing patients</h6>
                       </div>
                     </div>
                   </template>
@@ -86,8 +86,8 @@
                       <div
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
-                        <f7-icon material="health_and_safety" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Listar predições</h6>
+                        <f7-icon material="superscript" size="40px" color="primary" class="d-block"></f7-icon>
+                        <h6 class="d-block mb-0 mt-2">Listing algorithms</h6>
                       </div>
                     </div>
                   </template>
@@ -102,7 +102,7 @@
                         class="d-flex flex-column align-items-center justify-content-center menu-content-wrapper text-center"
                       >
                         <f7-icon material="help" size="40px" color="primary" class="d-block"></f7-icon>
-                        <h6 class="d-block mb-0 mt-2">Ajuda</h6>
+                        <h6 class="d-block mb-0 mt-2">Help</h6>
                       </div>
                     </div>
                   </template>

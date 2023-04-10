@@ -25,22 +25,24 @@
           <section>
             <div class="d-flex justify-content-between mb-5">
               <span>Recent added</span>
-              <span>13/12/2021</span>
+              <span>{{ lastOutcomeStatus.createdAt }}</span>
             </div>
 
             <f7-card
               class="m-0 status-card"
               :padding="false"
-              @click="f7router.navigate({ name: 'PatientStatus', params: { id: 999 } })"
+              @click="
+                f7router.navigate({ name: 'OutcomeStatus', params: { algorithmId, id: lastOutcomeStatus.patientId } })
+              "
             >
               <template #content>
                 <f7-button class="status-button">
                   <div class="d-flex justify-content-between w-100 mb-3">
-                    <h6 class="text-secondary-blue mb-0">Return from abandon</h6>
+                    <h6 class="text-secondary-blue mb-0">{{ lastOutcomeStatus.TIPO_CASO }}</h6>
                     <f7-icon material="chevron_right" class="status-icon"></f7-icon>
                   </div>
-                  <h4 class="fw-bold mb-0">Patient D#18062022</h4>
-                  <span class="text-gray-dark">In outpatient treatment</span>
+                  <h4 class="fw-bold mb-0">Patient {{ firstPatientName(lastOutcomeStatus.name) }}</h4>
+                  <span class="text-gray-dark">{{ lastOutcomeStatus.SITUACAO_ATUAL }}</span>
                 </f7-button>
               </template>
             </f7-card>
@@ -117,6 +119,7 @@
 </template>
 <script>
 import { f7 } from "framework7-vue";
+import { lastStatusByAlgorithmId } from "../../../services";
 
 export default {
   props: {
@@ -124,8 +127,14 @@ export default {
     f7router: Object,
   },
 
+  async mounted() {
+    await this.fetchLastOutcomeStatus();
+  },
+
   data() {
-    return {};
+    return {
+      lastOutcomeStatus: {},
+    };
   },
 
   computed: {
@@ -134,7 +143,20 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    async fetchLastOutcomeStatus() {
+      try {
+        const response = await lastStatusByAlgorithmId(this.algorithmId);
+        this.lastOutcomeStatus = response.data;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
+    firstPatientName(name = "- -") {
+      return name?.split(" ")?.[0];
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

@@ -73,3 +73,19 @@ export const lastOutcomeStatusByPatientId = async (id) => {
 
   return newResponse;
 };
+
+export const lastStatusByAlgorithmId = async (algorithmId) => {
+  console.log({ algorithmId });
+
+  const response = await api({
+    url: `status`,
+    method: "GET",
+    params: {
+      algorithmId,
+    },
+  });
+
+  const newResponse = { ...response, data: response.data.pop() || [] };
+
+  return newResponse;
+};

@@ -11,11 +11,11 @@
 
             <div class="d-flex actions">
               <f7-button outline class="Button me-5">
-                <span>Solicitar acesso</span>
+                <span>Request access</span>
               </f7-button>
 
               <f7-button fill class="Button" @click="f7router.navigate('/login/')">
-                <span>Entrar</span>
+                <span>Sign in</span>
               </f7-button>
             </div>
           </div>

@@ -27,7 +27,12 @@
               chevron-center
               v-for="({ id, name, type, status }, index) of patients"
               :key="index"
-              @click="f7router.navigate({ name: 'PatientStatus', params: { id } })"
+              @click="
+                f7router.navigate({
+                  name: 'PatientSingle',
+                  params: { id },
+                })
+              "
             >
               <template #default>
                 <section class="d-flex">
