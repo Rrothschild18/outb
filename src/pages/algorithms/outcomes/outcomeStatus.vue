@@ -203,7 +203,7 @@ export default {
     },
 
     formateStatusDate(date = new Date()) {
-      if (!date) return "-";
+      if (!date) return "--";
 
       const dateObj = new Date(date);
 
